@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { ApiServiceProvider } from '../../providers/api-service/api-service';
+import { PlaceListPage } from '../place-list/place-list';
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
@@ -10,9 +11,21 @@ export class ListPage {
   Places: Array<{ name: string, img: string }>;
   items;
   searchActivted;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.initializeItems();
+  apiData;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiServiceProvider: ApiServiceProvider) {
+    this.searchActivted  = false
+    this.getPosts()
+  }
+  getPosts() {
+    this.apiServiceProvider.getData().subscribe((data) => {
+      this.apiData = data.stores;
+      this.initializeItems();
+    });
+  }
+  initializeItems() {
     this.Moods = []
+    this.Places = []
+    this.items = []
     this.Moods.push({
       name: "alone",
       img: "assets/imgs/img/alone.png"
@@ -25,9 +38,8 @@ export class ListPage {
       name: "friends",
       img: "assets/imgs/img/friends.png"
     });
-    this.Places = []
     this.Places.push({
-      name: "coffee",
+      name: "cafe",
       img: "assets/imgs/img/coffee.png"
     });
     this.Places.push({
@@ -42,54 +54,16 @@ export class ListPage {
       name: "gym",
       img: "assets/imgs/img/gym.png"
     });
+    this.items = this.apiData
   }
-  initializeItems() {
-    this.searchActivted  = false
-    this.items = [
-      'Amsterdam',
-      'Bogota',
-      'Buenos Aires',
-      'Cairo',
-      'Dhaka',
-      'Edinburgh',
-      'Geneva',
-      'Genoa',
-      'Glasglow',
-      'Hanoi',
-      'Hong Kong',
-      'Islamabad',
-      'Istanbul',
-      'Jakarta',
-      'Kiel',
-      'Kyoto',
-      'Le Havre',
-      'Lebanon',
-      'Lhasa',
-      'Lima',
-      'London',
-      'Los Angeles',
-      'Madrid',
-      'Manila',
-      'New York',
-      'Olympia',
-      'Oslo',
-      'Panama City',
-      'Peking',
-      'Philadelphia',
-      'San Francisco',
-      'Seoul',
-      'Taipeh',
-      'Tel Aviv',
-      'Tokio',
-      'Uelzen',
-      'Washington'
-    ];
-  }
-  itemSelected(item){
-    console.log(item)
+  moodSelected(item){
+    console.log("itemselected"+item.name)
   }
   placeSelected(place){
-    console.log(place)
+    this.navCtrl.push(PlaceListPage,{placeName:place.name})
+  }
+  itemSelected(item) {
+    console.log(item.name)
   }
   getItems(ev) {
     // Reset items back to all of the items
@@ -101,7 +75,7 @@ export class ListPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }else{
       this.searchActivted  = false

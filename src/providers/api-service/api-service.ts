@@ -16,10 +16,15 @@ export class ApiServiceProvider {
   constructor(public http: Http) {
     console.log('Hello ApiServiceProvider Provider');
   }
-  getApiUrl: string = "http://10.140.200.166:9090/stores/getall";
+  getApiUrl: string = "http://10.140.200.166:9090/stores";
 
   getData() {
-    return this.http.get(this.getApiUrl)
+    return this.http.get(this.getApiUrl+"/getall")
+      .do((res: Response) => console.log(res.json()))
+      .map((res: Response) => res.json())
+  }
+  getDataByCat(catId){
+    return this.http.get(this.getApiUrl+"/getstoreofcategory/"+catId)
       .do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json())
   }

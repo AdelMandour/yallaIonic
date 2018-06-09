@@ -61,7 +61,7 @@
     </ion-list>
   </div>
   <ion-list *ngIf=" searchActivated == true ">
-      <button ion-item *ngFor="let item of items" (click)="itemSelected(item.name)">
+      <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
         <ion-avatar item-start>
           <img src="http://10.140.200.166:9090/stores/img/?img={{item.img}}">
         </ion-avatar>

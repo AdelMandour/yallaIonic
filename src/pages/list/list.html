@@ -10,7 +10,7 @@
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list-header *ngIf=" searchActivted == false ">Mood</ion-list-header>
   <ion-list no-lines *ngIf=" searchActivted == false ">
-    <button ion-item *ngFor="let mood of Moods" (click)="itemSelected(mood.name)">
+    <button ion-item *ngFor="let mood of Moods" (click)="moodSelected(mood)">
       <ion-avatar item-start>
         <img src={{mood.img}}>
       </ion-avatar>
@@ -19,7 +19,7 @@
   </ion-list>
   <ion-list-header *ngIf=" searchActivted == false ">Place</ion-list-header>
   <ion-list no-lines *ngIf=" searchActivted == false ">
-      <button ion-item *ngFor="let place of Places" (click)="placeSelected(place.name)">
+      <button ion-item *ngFor="let place of Places" (click)="placeSelected(place)">
         <ion-avatar item-start>
           <img src={{place.img}}>
         </ion-avatar>
@@ -27,8 +27,11 @@
       </button>
     </ion-list>
     <ion-list *ngIf=" searchActivted == true ">
-        <ion-item *ngFor="let item of items">
-          {{ item }}
-        </ion-item>
+        <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+            <ion-avatar item-start>
+              <img src="http://10.140.200.166:9090/stores/img/?img={{item.img}}">
+            </ion-avatar>
+            <h2>{{item.name}}</h2>
+          </button>
       </ion-list>
 </ion-content>
