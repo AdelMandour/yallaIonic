@@ -6,13 +6,68 @@
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="cat">
+      <ion-segment-button value="rest" >
+        <ion-icon name="md-restaurant" style="color: #d68a8a;"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="cafe">
+        <ion-icon name="cafe" style="color: #d68a8a;"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="shop">
+        <ion-icon name="basket" style="color: #d68a8a;"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="gym">
+        <img [src]="data.data.url" style="width:50px;height: 25px;">
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <div [ngSwitch]="cat" *ngIf=" searchActivated == false ">
+    <ion-list *ngSwitchCase="'gym'">
+      <button ion-item *ngFor="let gymItem of gyms" (click)="itemSelected(gymItem)">
+        <ion-avatar item-start>
+          <img src={{gymItem.img}} class="itemImg">
+        </ion-avatar>
+        <h2>{{gymItem.name}}</h2>
+      </button>
+    </ion-list>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+    <ion-list *ngSwitchCase="'rest'">
+      <button ion-item *ngFor="let restItem of rests" (click)="itemSelected(restItem)">
+        <ion-avatar item-start>
+          <img src={{restItem.img}}>
+        </ion-avatar>
+        <h2>{{restItem.name}}</h2>
+      </button>
+    </ion-list>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <ion-list *ngSwitchCase="'cafe'">
+      <button ion-item *ngFor="let cafeItem of cafes" (click)="itemSelected(cafeItem)">
+        <ion-avatar item-start>
+          <img src={{cafeItem.img}}>
+        </ion-avatar>
+        <h2>{{cafeItem.name}}</h2>
+      </button>
+    </ion-list>
+    <ion-list *ngSwitchCase="'shop'">
+      <button ion-item *ngFor="let shopItem of shops" (click)="itemSelected(shopItem)">
+        <ion-avatar item-start>
+          <img src={{shopItem.img}}>
+        </ion-avatar>
+        <h2>{{shopItem.name}}</h2>
+      </button>
+    </ion-list>
+  </div>
+  <ion-list *ngIf=" searchActivated == true ">
+      <button ion-item *ngFor="let data of dataList" (click)="itemSelected(item)">
+        <ion-avatar item-start>
+          <img src={{data.img}}>
+        </ion-avatar>
+        <h2>{{data.name}}</h2>
+      </button>
+  </ion-list>
 </ion-content>
+
+

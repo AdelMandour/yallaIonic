@@ -1,0 +1,69 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cards</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg social-cards">
+
+<ion-card>
+
+  <ion-item>
+    <ion-avatar item-start>
+      <img src={{item.img}}>
+    </ion-avatar>
+    <h2> {{item.name}}</h2>
+    <p>June 5, 2018</p>
+    <ion-col align-self-center text-center>
+      <ion-note>
+        11h ago
+      </ion-note>
+    </ion-col>
+  </ion-item>
+
+  <img src={{item.img}}>
+
+  <ion-card-content>
+    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+  </ion-card-content>
+
+  <ion-row>
+    <ion-col>
+      <ion-col>
+      <button ion-button color="primary" clear small icon-start>
+        <ion-icon name='thumbs-up'></ion-icon>
+        12 Likes
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button color="primary" clear small icon-start>
+        <ion-icon name='text'></ion-icon>
+        4 Comments
+      </button>
+    </ion-col>
+  </ion-col>
+    <ion-col>
+      <button ion-button color="primary" clear small icon-start>
+       <ion-icon name="star"></ion-icon>
+         Favourite
+      </button>
+      <ion-col>
+        <button ion-button color="primary" clear small icon-start>
+          <ion-icon name="cart"></ion-icon>
+          5 Contents
+        </button>
+      </ion-col>
+    </ion-col>
+  </ion-row>
+</ion-card>
+</ion-content>
+
+<style>
+  .social-cards ion-col {
+    padding: 0;
+  }
+</style>
