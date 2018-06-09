@@ -1,0 +1,38 @@
+<!--
+  Generated template for the PlaceListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Place List</ion-title>
+    </ion-navbar>
+  </ion-header>
+<ion-content padding>
+    <ion-list *ngFor="let item of apiData">
+       <!-- <button ion-item *ngFor="let item of apiData" (click)="itemSelected(item)">
+          <ion-avatar item-start>
+            <img src="http://10.140.200.166:9090/stores/img/?img={{item.img}}" class="itemImg">
+          </ion-avatar>
+          <h2>{{item.name}}</h2>
+        </button> -->
+        <ion-card>
+            <button ion-item (click)="itemSelected(item)">
+              <ion-avatar item-start>
+                <img src="http://10.140.200.166:9090/stores/img/?img={{item.imgcover}}">
+              </ion-avatar>
+              <h2>{{item.name}}</h2>
+              <p>{{item.date}}</p>
+            </button>
+            <img src="http://10.140.200.166:9090/stores/img/?img={{item.img}}">
+            <ion-card-content>
+              <p>{{item.address}}</p>
+              <p>{{item.describe}}</p>
+            </ion-card-content>          
+          </ion-card>
+      </ion-list>
+</ion-content>

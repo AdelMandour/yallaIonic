@@ -10,13 +10,15 @@ import { CardsPage } from '../pages/cards/cards';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ApiServiceProvider } from '../providers/api-service/api-service';
+import { PlaceListPage } from '../pages/place-list/place-list';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    CardsPage
+    CardsPage,
+    PlaceListPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { ApiServiceProvider } from '../providers/api-service/api-service';
     MyApp,
     HomePage,
     ListPage,
-    CardsPage
+    CardsPage,
+    PlaceListPage
   ],
   providers: [
     StatusBar,
