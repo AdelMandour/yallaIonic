@@ -22,17 +22,13 @@
       <ion-segment-button value="gym">
         <img src="assets/imgs/img/gymIcon.png" style="width:50px;height: 25px;">
       </ion-segment-button>
-      <ion-segment-button value="all">
-        All
-      </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
   <div [ngSwitch]="cat" *ngIf=" searchActivated == false ">
     <ion-list *ngSwitchCase="'gym'">
       <button ion-item *ngFor="let gymItem of gyms" (click)="itemSelected(gymItem)">
-
         <ion-avatar item-start>
-          <img src={{gymItem.img}} class="itemImg">
+          <img src="http://10.140.200.166:9090/stores/img/?img={{gymItem.img}}" class="itemImg">
         </ion-avatar>
         <h2>{{gymItem.name}}</h2>
       </button>
@@ -40,7 +36,7 @@
     <ion-list *ngSwitchCase="'rest'">
       <button ion-item *ngFor="let restItem of rests" (click)="itemSelected(restItem)">
         <ion-avatar item-start>
-          <img src={{restItem.img}}>
+          <img src="http://10.140.200.166:9090/stores/img/?img={{restItem.img}}">
         </ion-avatar>
         <h2>{{restItem.name}}</h2>
       </button>
@@ -48,18 +44,16 @@
 
     <ion-list *ngSwitchCase="'cafe'">
       <button ion-item *ngFor="let cafeItem of cafes" (click)="itemSelected(cafeItem)">
-
         <ion-avatar item-start>
-          <img src={{cafeItem.img}}>
+          <img src="http://10.140.200.166:9090/stores/img/?img={{cafeItem.img}}">
         </ion-avatar>
         <h2>{{cafeItem.name}}</h2>
       </button>
     </ion-list>
     <ion-list *ngSwitchCase="'shop'">
       <button ion-item *ngFor="let shopItem of shops" (click)="itemSelected(shopItem)">
-
         <ion-avatar item-start>
-          <img src={{shopItem.img}}>
+          <img src="http://10.140.200.166:9090/stores/img/?img={{shopItem.img}}" >
         </ion-avatar>
         <h2>{{shopItem.name}}</h2>
       </button>
@@ -68,7 +62,7 @@
   <ion-list *ngIf=" searchActivated == true ">
       <button ion-item *ngFor="let data of dataList" (click)="itemSelected(item)">
         <ion-avatar item-start>
-          <img src={{data.img}}>
+          <img src="http://10.140.200.166:9090/stores/img/?img={{item.img}}">
         </ion-avatar>
         <h2>{{data.name}}</h2>
       </button>

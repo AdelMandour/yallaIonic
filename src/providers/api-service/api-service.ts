@@ -17,10 +17,9 @@ export class ApiServiceProvider {
     console.log('Hello ApiServiceProvider Provider');
   }
 
-  getApiUrl: string = "http://localhost:9090/stores/getall";
+  getApiUrl: string = "http://10.140.200.166:9090/stores/getall";
 
   getData() {
-
     return this.http.get(this.getApiUrl)
       .do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json())
