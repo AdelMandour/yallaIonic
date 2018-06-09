@@ -16,16 +16,13 @@ export class ApiServiceProvider {
   constructor(public http: Http) {
     console.log('Hello ApiServiceProvider Provider');
   }
-  getApiUrl: string = "https://localhost:9090/stores/getall";
 
-  
+  getApiUrl: string = "http://localhost:9090/stores/getall";
+
   getData() {
-    return new Promise(resolve => {
-      this.http.get(this.getApiUrl+'/users').subscribe(data => {
-        resolve(data);
-      }, err => {
-        console.log(err);
-      });
-    });
+
+    return this.http.get(this.getApiUrl)
+      .do((res: Response) => console.log(res.json()))
+      .map((res: Response) => res.json())
   }
 }

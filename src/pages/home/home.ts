@@ -15,6 +15,7 @@ export class HomePage {
   cafes: Array<{ name: string, img: string }>;
   shops: Array<{ name: string, img: string }>;
   searchActivated;
+
   //dataList = [];
   dataList;
   constructor(public navCtrl: NavController, private apiServiceProvider: ApiServiceProvider) {
@@ -119,4 +120,5 @@ export class HomePage {
      });
 //console.log(item)
   }
+
 }
