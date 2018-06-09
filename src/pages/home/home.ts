@@ -17,13 +17,12 @@ export class HomePage {
   apiData
   constructor(public navCtrl: NavController, public apiServiceProvider: ApiServiceProvider) {
     this.searchActivated = false;
-    this.initializeItems();
     this.getPosts()
   }
   getPosts() {
     this.apiServiceProvider.getData().subscribe((data) => {
       this.apiData = data.stores;
-      
+      this.initializeItems();
     });
   }
   initializeItems() {
@@ -32,66 +31,21 @@ export class HomePage {
     this.rests = []
     this.cafes = []
     this.shops = []
-    this.gyms.push({
-      name: "gym1",
-      img: "assets/imgs/img/gym1.jpg"
-    });
-    this.gyms.push({
-      name: "gym2",
-      img: "assets/imgs/img/gym2.jpg"
-    });
-    this.gyms.push({
-      name: "gym3",
-      img: "assets/imgs/img/gym3.jpg"
-    });
-    this.rests.push({
-      name: "rest1",
-      img: "assets/imgs/img/rest1.jpg"
-    })
-    this.rests.push({
-      name: "rest2",
-      img: "assets/imgs/img/rest2.jpg"
-    })
-    this.rests.push({
-      name: "rest3",
-      img: "assets/imgs/img/rest3.jpg"
-    })
-    this.cafes.push({
-      name: "cafe1",
-      img: "assets/imgs/img/cafe1.jpg"
-    })
-    this.cafes.push({
-      name: "cafe2",
-      img: "assets/imgs/img/cafe2.jpg"
-    })
-    this.cafes.push({
-      name: "cafe3",
-      img: "assets/imgs/img/cafe3.jpg"
-    })
-    this.shops.push({
-      name: "shop1",
-      img: "assets/imgs/img/shop1.jpg"
-    })
-    this.shops.push({
-      name: "shop2",
-      img: "assets/imgs/img/shop2.jpg"
-    })
-    this.shops.push({
-      name: "shop3",
-      img: "assets/imgs/img/shop3.jpg"
-    })
-    for (let index = 0; index < this.gyms.length; index++) {
-      this.items.push(this.gyms[index]);
+    for (let index = 0; index < this.apiData.length; index++) {
+      if (this.apiData[index].category == 1) {
+        this.cafes.push(this.apiData[index])
+      }
+      if (this.apiData[index].category == 2) {
+        this.rests.push(this.apiData[index])
+      }
+      if (this.apiData[index].category == 3) {
+        this.shops.push(this.apiData[index])
+      }
+      if (this.apiData[index].category == 4) {
+        this.gyms.push(this.apiData[index])
+      }
     }
-    for (let index = 0; index < this.rests.length; index++) {
-      this.items.push(this.rests[index]);
-    }
-    for (let index = 0; index < this.cafes.length; index++) {
-      this.items.push(this.cafes[index]);
-    }
-    for (let index = 0; index < this.shops.length; index++) {
-      this.items.push(this.shops[index]);
-    }
+    this.items = this.apiData;
   }
   getItems(ev) {
     // Reset items back to all of the items
@@ -106,10 +60,10 @@ export class HomePage {
       })
     } else {
       this.searchActivated = false;
-      this.cat = "gym"
+      this.cat = "rest"
     }
   }
   itemSelected(item) {
-    console.log(item)
+    console.log(item.name)
   }
 }
