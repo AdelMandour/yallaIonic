@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
+<<<<<<< HEAD
 import { CardsPage } from '../cards/cards';
 import { AlertController } from 'ionic-angular';
 import { SigninUserPage } from '../signin-user/signin-user';
+=======
+import { PostsListPage } from '../posts-list/posts-list';
+>>>>>>> cc081a8cf2c9aaf477bf5d4079f585e20c2a4f77
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -18,10 +22,14 @@ export class HomePage {
   shops: Array<{ name: string, img: string }>;
   searchActivated;
   apiData;
+<<<<<<< HEAD
   //dataList = [];
   dataList;
   //,public alertCtrl: AlertController
   constructor(public navCtrl: NavController, private apiServiceProvider: ApiServiceProvider,public alertCtrl: AlertController) {
+=======
+  constructor(public navCtrl: NavController, private apiServiceProvider: ApiServiceProvider) {
+>>>>>>> cc081a8cf2c9aaf477bf5d4079f585e20c2a4f77
     this.searchActivated = false;
     this.getPosts()
   }
@@ -65,9 +73,7 @@ export class HomePage {
       this.initializeItems();
     });
   }
-  
-
-  initializeItems() {
+    initializeItems() {
     this.items = []
     this.gyms = []
     this.rests = []
@@ -106,10 +112,9 @@ export class HomePage {
     }
   }
   itemSelected(item) {
-  this.navCtrl.push(CardsPage, {
-	    param1: item
-     });
-//console.log(item)
+    this.navCtrl.push(PostsListPage, { storeId: item._id, storeName: item.name })
   }
-
+  addToFavorite(fav) {
+    this.apiServiceProvider.makeFavorite(fav._id, "5b1cf04f4b9d4e2f94178f88")
+  }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
+import { PostsListPage } from '../posts-list/posts-list';
 
 /**
  * Generated class for the PlaceListPage page.
@@ -24,7 +25,6 @@ export class PlaceListPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PlaceListPage');
   }
   loadData() {
     switch (this.placeName) {
@@ -45,10 +45,9 @@ export class PlaceListPage {
     }
     this.apiServiceProvider.getDataByCat(this.catID).subscribe((data) => {
       this.apiData = data.store;
-      console.log(this.apiData)
     });
   }
   itemSelected(object){
-    console.log(object.name)
+    this.navCtrl.push(PostsListPage,{storeId:object._id,storeName:object.name})
   }
 }

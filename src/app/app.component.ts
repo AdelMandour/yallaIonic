@@ -6,9 +6,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { CardsPage } from '../pages/cards/cards';
+<<<<<<< HEAD
 import { SignupUserPage } from '../pages/signup-user/signup-user';
 import { SigninUserPage } from '../pages/signin-user/signin-user';
 
+=======
+import { FavListPage } from '../pages/fav-list/fav-list';
+>>>>>>> cc081a8cf2c9aaf477bf5d4079f585e20c2a4f77
 
 @Component({
   templateUrl: 'app.html'
@@ -31,10 +35,14 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
+<<<<<<< HEAD
       { title: 'Cards', component: CardsPage },
       { title: 'SignupUser', component: SignupUserPage },
       { title: 'SigninUser', component:  SigninUserPage  }
       
+=======
+      { title: 'Favorite', component: FavListPage}
+>>>>>>> cc081a8cf2c9aaf477bf5d4079f585e20c2a4f77
     ];
 
   }

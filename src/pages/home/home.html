@@ -32,48 +32,165 @@
   </ion-toolbar>
   <div [ngSwitch]="cat" *ngIf=" searchActivated == false ">
     <ion-list *ngSwitchCase="'gym'">
-      <button ion-item *ngFor="let gymItem of gyms" (click)="itemSelected(gymItem)">
-        <ion-avatar item-start>
-          <img src="http://10.140.200.166:9090/stores/img/?img={{gymItem.img}}" class="itemImg">
-        </ion-avatar>
-        <h2>{{gymItem.name}}</h2>
-      </button>
+      <div *ngFor="let gymItem of gyms">
+        <ion-card>
+          <button ion-item (click)="itemSelected(gymItem)">
+            <ion-avatar item-start>
+              <img src="http://10.140.200.166:9090/stores/img/?img={{gymItem.imgcover}}">
+            </ion-avatar>
+            <h2>{{gymItem.name}}</h2>
+            <p>{{gymItem.date}}</p>
+          </button>
+          <img src="http://10.140.200.166:9090/stores/img/?img={{gymItem.img}}">
+          <ion-card-content>
+            <p>{{gymItem.address}}</p>
+            <p>{{gymItem.describe}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>12 Likes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="text"></ion-icon>
+                <div>4 Comments</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small (click)="addToFavorite(gymItem)">
+                <ion-icon name="star-outline"></ion-icon>
+                <div>Favorite</div>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
     </ion-list>
     <ion-list *ngSwitchCase="'rest'">
-      <button ion-item *ngFor="let restItem of rests" (click)="itemSelected(restItem)">
-        <ion-avatar item-start>
+      <div *ngFor="let restItem of rests">
+        <ion-card>
+          <button ion-item (click)="itemSelected(restItem)">
+            <ion-avatar item-start>
+              <img src="http://10.140.200.166:9090/stores/img/?img={{restItem.imgcover}}">
+            </ion-avatar>
+            <h2>{{restItem.name}}</h2>
+            <p>{{restItem.date}}</p>
+          </button>
           <img src="http://10.140.200.166:9090/stores/img/?img={{restItem.img}}">
-        </ion-avatar>
-        <h2>{{restItem.name}}</h2>
-      </button>
+          <ion-card-content>
+            <p>{{restItem.address}}</p>
+            <p>{{restItem.describe}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>12 Likes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="text"></ion-icon>
+                <div>4 Comments</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small (click)="addToFavorite(restItem)">
+                <ion-icon name="star-outline"></ion-icon>
+                <div>Favorite</div>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
     </ion-list>
 
     <ion-list *ngSwitchCase="'cafe'">
-      <button ion-item *ngFor="let cafeItem of cafes" (click)="itemSelected(cafeItem)">
-        <ion-avatar item-start>
+      <div *ngFor="let cafeItem of cafes">
+        <ion-card>
+          <button ion-item (click)="itemSelected(cafeItem)">
+            <ion-avatar item-start>
+              <img src="http://10.140.200.166:9090/stores/img/?img={{cafeItem.imgcover}}">
+            </ion-avatar>
+            <h2>{{cafeItem.name}}</h2>
+            <p>{{cafeItem.date}}</p>
+          </button>
           <img src="http://10.140.200.166:9090/stores/img/?img={{cafeItem.img}}">
-        </ion-avatar>
-        <h2>{{cafeItem.name}}</h2>
-      </button>
+          <ion-card-content>
+            <p>{{cafeItem.address}}</p>
+            <p>{{cafeItem.describe}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>12 Likes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="text"></ion-icon>
+                <div>4 Comments</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small (click)="addToFavorite(cafeItem)">
+                <ion-icon name="star-outline"></ion-icon>
+                <div>Favorite</div>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
     </ion-list>
     <ion-list *ngSwitchCase="'shop'">
-      <button ion-item *ngFor="let shopItem of shops" (click)="itemSelected(shopItem)">
-        <ion-avatar item-start>
-          <img src="http://10.140.200.166:9090/stores/img/?img={{shopItem.img}}" >
-        </ion-avatar>
-        <h2>{{shopItem.name}}</h2>
-      </button>
+      <div *ngFor="let shopItem of shops">
+        <ion-card>
+          <button ion-item (click)="itemSelected(shopItem)">
+            <ion-avatar item-start>
+              <img src="http://10.140.200.166:9090/stores/img/?img={{shopItem.imgcover}}">
+            </ion-avatar>
+            <h2>{{shopItem.name}}</h2>
+            <p>{{shopItem.date}}</p>
+          </button>
+          <img src="http://10.140.200.166:9090/stores/img/?img={{shopItem.img}}">
+          <ion-card-content>
+            <p>{{shopItem.address}}</p>
+            <p>{{shopItem.describe}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>12 Likes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="text"></ion-icon>
+                <div>4 Comments</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small (click)="addToFavorite(shopItem)">
+                <ion-icon name="star-outline"></ion-icon>
+                <div>Favorite</div>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
     </ion-list>
   </div>
   <ion-list *ngIf=" searchActivated == true ">
-      <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-        <ion-avatar item-start>
-          <img src="http://10.140.200.166:9090/stores/img/?img={{item.img}}">
-        </ion-avatar>
-        <h2>{{data.name}}</h2>
-      </button>
+    <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+      <ion-avatar item-start>
+        <img src="http://10.140.200.166:9090/stores/img/?img={{item.img}}">
+      </ion-avatar>
+      <h2>{{item.name}}</h2>
+    </button>
   </ion-list>
 </ion-content>
-
-
-
