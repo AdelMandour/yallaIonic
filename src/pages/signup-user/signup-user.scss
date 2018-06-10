@@ -1,0 +1,280 @@
+
+
+agm-map {
+    height: 150px;
+  }
+  nav{
+    position: absolute;
+  
+  }
+  
+  .navbar-brand{
+    color: white;
+    margin-left:55px;
+    font-size: 35px;
+    font-family: "Pacifico",cursive;
+  }
+  .navbar i{
+    left: 27px;
+    top: 18px;
+    position: absolute;
+    font-size: 46px;
+    color: #ff4949;
+    cursor: pointer;
+  }
+  .navbar-brand:hover{
+    color: white;
+  }
+  .navbar-nav{
+    margin-left: 76%;
+  }
+  .navbar-nav .nav-item a{
+    margin-right: 21px;
+    color: #ff4949;
+    font-family: "Pacifico",cursive;
+    font-size: 25px;
+    border-radius: 6px;
+    width: 95px;
+    height: 43px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  
+  .modalDialog {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:1;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: auto;
+  
+  }
+  .modalDialog > div {
+    position: relative;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    border-radius: 10px;
+    background: #fff;
+    background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999);
+  }
+  .close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+  }
+  .close:hover { background: #00d9ff; }
+  
+  
+  
+  
+  /** chosse sign in **/
+  
+  .showpoplogin .sign-in{
+    margin-top: 25px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #585f76;
+    font-family: "Pacifico",cursive;
+    margin-bottom: 30px;
+    margin-left: 35%;
+  }
+  .showpoplogin .sign-in i{
+    margin-right: 8px;
+    color: #ff4949;
+    font-size: 35px;
+  }
+  .showpoplogin button{
+    cursor: pointer;
+    margin-bottom: 25px;
+    color: #f3f3f3;
+    font-weight: bold;
+  }
+  
+  .sign-in-user > button{
+    background-color: #37a69d;
+  
+  }
+  .sign-in-store > button{
+    background-color: #d2a1a7;
+  
+  }
+  
+  /** sign in **/
+  .sign-in-general .sign-in{
+    margin-top: 25px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #585f76;
+    font-family: "Pacifico",cursive;
+    margin-bottom: 30px;
+  }
+  .sign-in-general .sign-in i{
+    margin-right: 8px;
+    color: #ff4949;
+    font-size: 30px;
+  }
+  .sign-in-general .alert{
+    padding: 5px;
+  }
+  .sign-in-general .alert > span{
+  
+    font-size: 15px;
+    display: block;
+    font-weight: bold;
+  
+  }
+  
+  .login-form > input{
+    margin-bottom: 15px;
+    outline: none !important;
+  }
+  .login-form > input:focus{
+    outline: none !important;
+  }
+  .login-form > input[type = "submit"]{
+  background-color: #4867aa;
+    color: #f3f3f3;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 5px;
+  }
+  
+  .login-form > input[type = "submit"]:focus{
+    outline: none !important;
+  }
+  .sign-in-general .not-account{
+    color: #585f76;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  /*.login-form > input.ng-valid,
+  .login-form > input[type="password"].ng-valid
+  {
+    border: 2px solid #37b129;
+  }*/
+  
+  .errinput {
+    border: 2px solid #ff314b;
+  }
+  
+  .sign-in-socail{
+    border-left:1px solid #000000 ;
+    height: 200px;
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-right: 5px;
+    margin-top: 45px !important;
+  }
+  .sign-in-socail .facebook,
+  .sign-in-socail .google,
+  .sign-in-socail .twitter{
+      height: 45px;
+      width: 85%;
+      color: #f3f3f3;
+      padding-left: 20px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      font-weight: bold;
+  }
+  .sign-in-socail .facebook{
+    background-color:#4867aa;
+  }
+  .sign-in-socail .google{
+    background-color: #d54b3d;
+  }
+  .sign-in-socail .twitter{
+    background-color: #1da1f2;
+  }
+  .sign-in-socail .facebook span,
+  .sign-in-socail .google span,
+  .sign-in-socail .twitter span{
+    display: inline-block;
+    border-right: 1px solid #f3f3f3;
+    margin-right:35px ;
+    font-size: 17px;
+    color: #f3f3f3;
+  
+  }
+  .sign-in-socail .facebook span{
+    padding-right: 15px;
+  }
+  .sign-in-socail .google span{
+    padding-right: 5px;
+  
+  }
+  .sign-in-socail .twitter span{
+    padding-right: 9px;
+  }
+  /** show datat***/
+  
+  
+  .show-data .img-cover{
+    cursor: pointer;
+    width: 130px;
+    height: 130px;
+    border: 1px solid #373c4f;
+    border-radius: 50%;
+    background-size: cover;
+    display: block;
+    margin-top: 10px;
+    margin-left: 27%;
+  }
+  .show-data .name{
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .show-data .setting{
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #f3f3f3;
+    cursor: pointer;
+    background-color: #4867aa;
+    text-decoration: none;
+  }
+  .show-data .admin{
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #f3f3f3;
+    cursor: pointer;
+  background-color: #b62654;
+    text-decoration: none;
+  }
+  .show-data .logout{
+  cursor: pointer;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #f3f3f3;
+    background-color: #e36f4d;
+  }
+  

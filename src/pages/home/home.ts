@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
 import { CardsPage } from '../cards/cards';
+import { AlertController } from 'ionic-angular';
+import { SigninUserPage } from '../signin-user/signin-user';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -18,10 +20,45 @@ export class HomePage {
   apiData;
   //dataList = [];
   dataList;
-  constructor(public navCtrl: NavController, private apiServiceProvider: ApiServiceProvider) {
+  //,public alertCtrl: AlertController
+  constructor(public navCtrl: NavController, private apiServiceProvider: ApiServiceProvider,public alertCtrl: AlertController) {
     this.searchActivated = false;
     this.getPosts()
   }
+
+  //start prompt
+  doPrompt() {
+    let prompt = this.alertCtrl.create({
+      title: 'Sign In',
+      // message: "Enter a name for this new album you're so keen on adding",
+      // inputs: [
+      //   {
+      //     name: 'title',
+      //     placeholder: 'Title'
+      //   },
+      // ],
+      buttons: [
+        {
+          text: 'Sign In User',
+          handler: data => {
+
+            this.navCtrl.push(SigninUserPage);
+           // [navPush]="SigninUserPage";
+           // console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Sign In Store',
+          handler: data => {
+            //this.navCtrl.push(SigninStorePage);
+            //console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+  //end prompt
   getPosts() {
     this.apiServiceProvider.getData().subscribe((data) => {
       this.apiData = data.stores;

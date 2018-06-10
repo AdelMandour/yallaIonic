@@ -6,11 +6,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { CardsPage } from '../pages/cards/cards';
+import { SignupUserPage } from '../pages/signup-user/signup-user';
+import { SigninUserPage } from '../pages/signin-user/signin-user';
+
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+
+  // title: string = 'Map';
+  // lat: number = 51.678418;
+  // lng: number = 7.809007;
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
@@ -24,7 +31,10 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
-      { title: 'Cards', component: CardsPage }
+      { title: 'Cards', component: CardsPage },
+      { title: 'SignupUser', component: SignupUserPage },
+      { title: 'SigninUser', component:  SigninUserPage  }
+      
     ];
 
   }

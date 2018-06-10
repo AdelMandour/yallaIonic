@@ -7,10 +7,17 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { CardsPage } from '../pages/cards/cards';
 
+import { PlaceListPage } from '../pages/place-list/place-list';
+import { SignupUserPage } from '../pages/signup-user/signup-user';
+import { SigninUserPage } from '../pages/signin-user/signin-user';
+
+//import { AgmCoreModule } from '@agm/core';
+
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ApiServiceProvider } from '../providers/api-service/api-service';
-import { PlaceListPage } from '../pages/place-list/place-list';
+
 
 @NgModule({
   declarations: [
@@ -18,13 +25,15 @@ import { PlaceListPage } from '../pages/place-list/place-list';
     HomePage,
     ListPage,
     CardsPage,
-    PlaceListPage
+    PlaceListPage,
+    SignupUserPage,
+    SigninUserPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule
-
+ 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -32,7 +41,9 @@ import { PlaceListPage } from '../pages/place-list/place-list';
     HomePage,
     ListPage,
     CardsPage,
-    PlaceListPage
+    PlaceListPage,
+    SignupUserPage,
+    SigninUserPage,
   ],
   providers: [
     StatusBar,
