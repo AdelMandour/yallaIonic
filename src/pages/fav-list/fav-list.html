@@ -1,31 +1,35 @@
 <!--
-  Generated template for the PlaceListPage page.
+  Generated template for the FavListPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
+
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Place List</ion-title>
+    <ion-title>favList</ion-title>
   </ion-navbar>
+
 </ion-header>
+
+
 <ion-content padding>
-  <ion-list *ngFor="let item of apiData">
+  <div *ngFor="let favItem of favList">
     <ion-card>
-      <button ion-item (click)="itemSelected(item)">
+      <button ion-item (click)="itemSelected(favItem)">
         <ion-avatar item-start>
-          <img src="http://10.140.200.166:9090/stores/img/?img={{item.imgcover}}">
+          <img src="http://10.140.200.166:9090/stores/img/?img={{favItem.imgcover}}">
         </ion-avatar>
-        <h2>{{item.name}}</h2>
-        <p>{{item.date}}</p>
+        <h2>{{favItem.name}}</h2>
+        <p>{{favItem.date}}</p>
       </button>
-      <img src="http://10.140.200.166:9090/stores/img/?img={{item.img}}">
+      <img src="http://10.140.200.166:9090/stores/img/?img={{favItem.img}}">
       <ion-card-content>
-        <p>{{item.address}}</p>
-        <p>{{item.describe}}</p>
+        <p>{{favItem.address}}</p>
+        <p>{{favItem.describe}}</p>
       </ion-card-content>
       <ion-row>
         <ion-col>
@@ -41,12 +45,12 @@
           </button>
         </ion-col>
         <ion-col>
-          <button ion-button icon-left clear small>
+          <button ion-button icon-left clear small (click)="addToFavorite(shopItem)">
             <ion-icon name="star-outline"></ion-icon>
             <div>Favorite</div>
           </button>
         </ion-col>
       </ion-row>
     </ion-card>
-  </ion-list>
+  </div>
 </ion-content>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
 import { PlaceListPage } from '../place-list/place-list';
+import { PostsListPage } from '../posts-list/posts-list';
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
@@ -63,7 +64,7 @@ export class ListPage {
     this.navCtrl.push(PlaceListPage,{placeName:place.name})
   }
   itemSelected(item) {
-    console.log(item.name)
+    this.navCtrl.push(PostsListPage,{storeId:item._id,storeName:item.name})
   }
   getItems(ev) {
     // Reset items back to all of the items

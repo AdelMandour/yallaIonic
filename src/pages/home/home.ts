@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
-import { CardsPage } from '../cards/cards';
+import { PostsListPage } from '../posts-list/posts-list';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -16,8 +16,6 @@ export class HomePage {
   shops: Array<{ name: string, img: string }>;
   searchActivated;
   apiData;
-  //dataList = [];
-  dataList;
   constructor(public navCtrl: NavController, private apiServiceProvider: ApiServiceProvider) {
     this.searchActivated = false;
     this.getPosts()
@@ -28,9 +26,7 @@ export class HomePage {
       this.initializeItems();
     });
   }
-  
-
-  initializeItems() {
+    initializeItems() {
     this.items = []
     this.gyms = []
     this.rests = []
@@ -69,10 +65,9 @@ export class HomePage {
     }
   }
   itemSelected(item) {
-  this.navCtrl.push(CardsPage, {
-	    param1: item
-     });
-//console.log(item)
+    this.navCtrl.push(PostsListPage, { storeId: item._id, storeName: item.name })
   }
-
+  addToFavorite(fav) {
+    this.apiServiceProvider.makeFavorite(fav._id, "5b1cf04f4b9d4e2f94178f88")
+  }
 }

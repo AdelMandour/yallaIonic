@@ -5,20 +5,22 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { CardsPage } from '../pages/cards/cards';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ApiServiceProvider } from '../providers/api-service/api-service';
 import { PlaceListPage } from '../pages/place-list/place-list';
+import { PostsListPage } from '../pages/posts-list/posts-list';
+import { FavListPage } from '../pages/fav-list/fav-list';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    CardsPage,
-    PlaceListPage
+    PlaceListPage,
+    PostsListPage,
+    FavListPage
   ],
   imports: [
     BrowserModule,
@@ -31,8 +33,9 @@ import { PlaceListPage } from '../pages/place-list/place-list';
     MyApp,
     HomePage,
     ListPage,
-    CardsPage,
-    PlaceListPage
+    PlaceListPage,
+    PostsListPage,
+    FavListPage
   ],
   providers: [
     StatusBar,

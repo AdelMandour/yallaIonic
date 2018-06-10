@@ -1,31 +1,36 @@
 <!--
-  Generated template for the PlaceListPage page.
+  Generated template for the PostsListPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
+
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Place List</ion-title>
+    <ion-title>{{storeName}}</ion-title>
   </ion-navbar>
+
 </ion-header>
 <ion-content padding>
-  <ion-list *ngFor="let item of apiData">
+  <ion-list *ngFor="let content of contents">
     <ion-card>
-      <button ion-item (click)="itemSelected(item)">
+      <button ion-item (click)="itemSelected(content)">
         <ion-avatar item-start>
-          <img src="http://10.140.200.166:9090/stores/img/?img={{item.imgcover}}">
+          <img src="http://10.140.200.166:9090/stores/img/?img={{store.imgcover}}">
         </ion-avatar>
-        <h2>{{item.name}}</h2>
-        <p>{{item.date}}</p>
+        <h2>{{store.name}}</h2>
+        <h3>{{content.name}}</h3>
+        <p>{{content.date}}</p>
       </button>
-      <img src="http://10.140.200.166:9090/stores/img/?img={{item.img}}">
+      <div *ngFor="let image of content.img">
+        <img src="http://10.140.200.166:9090/stores/img/?img={{image}}">
+      </div>
       <ion-card-content>
-        <p>{{item.address}}</p>
-        <p>{{item.describe}}</p>
+        <p>{{store.address}}</p>
+        <p>{{content.description}}</p>
       </ion-card-content>
       <ion-row>
         <ion-col>
@@ -38,12 +43,6 @@
           <button ion-button icon-left clear small>
             <ion-icon name="text"></ion-icon>
             <div>4 Comments</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="star-outline"></ion-icon>
-            <div>Favorite</div>
           </button>
         </ion-col>
       </ion-row>
