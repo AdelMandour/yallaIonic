@@ -73,4 +73,7 @@ export class ApiServiceProvider {
       // .do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json())
   }
+  postData(userData,page){
+
+  }
 }

@@ -11,6 +11,11 @@
         <ion-icon name="heart" style="color: #cc2d2d;">Yalla </ion-icon> 
     </button>
   </ion-navbar>
+  <ion-content padding>
+    <h2>Welcome to {{userDetails.name}}</h2>
+    <h3>Email: {{userDetails.email}}</h3>
+    <button ion-button color="primary" (click)="logout()">Logout</button>
+  </ion-content>
 </ion-header>
 <ion-content>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
