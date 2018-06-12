@@ -8,7 +8,6 @@ import { PostsListPage } from '../posts-list/posts-list';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  Moods: Array<{ name: string, img: string }>;
   Places: Array<{ name: string, img: string }>;
   items;
   searchActivted;
@@ -24,21 +23,8 @@ export class ListPage {
     });
   }
   initializeItems() {
-    this.Moods = []
     this.Places = []
     this.items = []
-    this.Moods.push({
-      name: "alone",
-      img: "assets/imgs/img/alone.png"
-    });
-    this.Moods.push({
-      name: "couple",
-      img: "assets/imgs/img/couple.png"
-    });
-    this.Moods.push({
-      name: "friends",
-      img: "assets/imgs/img/friends.png"
-    });
     this.Places.push({
       name: "cafe",
       img: "assets/imgs/img/coffee.png"
@@ -56,9 +42,6 @@ export class ListPage {
       img: "assets/imgs/img/gym.png"
     });
     this.items = this.apiData
-  }
-  moodSelected(item){
-    console.log("itemselected"+item.name)
   }
   placeSelected(place){
     this.navCtrl.push(PlaceListPage,{placeName:place.name})

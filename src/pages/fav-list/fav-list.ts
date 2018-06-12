@@ -29,6 +29,7 @@ export class FavListPage {
       this.favData = data.allfavorite;
       this.favData.forEach(element => {
         this.apiServiceProvider.getStore(element.storeid._id).subscribe((data) => {
+          console.log(data)
           if (data[1]) {
             this.favList.push(data[1].store[0])
           } else {

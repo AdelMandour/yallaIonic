@@ -19,14 +19,14 @@
     <ion-card>
       <button ion-item (click)="itemSelected(content)">
         <ion-avatar item-start>
-          <img src="http://10.140.200.166:9090/stores/img/?img={{store.imgcover}}">
+          <img src="http://localhost:9090/stores/img/?img={{store.imgcover}}">
         </ion-avatar>
         <h2>{{store.name}}</h2>
         <h3>{{content.name}}</h3>
-        <p>{{content.date}}</p>
+        <p>{{content.date | date}}</p>
       </button>
       <div *ngFor="let image of content.img">
-        <img src="http://10.140.200.166:9090/stores/img/?img={{image}}">
+        <img src="http://localhost:9090/stores/img/?img={{image}}">
       </div>
       <ion-card-content>
         <p>{{store.address}}</p>
