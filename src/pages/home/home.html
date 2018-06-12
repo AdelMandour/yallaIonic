@@ -3,19 +3,20 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <button ion-button icon-only>
+    <ion-title>Home</ion-title>
+    <!-- <button ion-button icon-only>
       <ion-icon name="home">Home </ion-icon>
-    </button>
+    </button> -->
     <!--  block (click)="doPrompt()" -->
-    <button ion-button color="light" block (click)="doPrompt()">
+    <!-- <button ion-button color="light" block (click)="doPrompt()">
         <ion-icon name="heart" style="color: #cc2d2d;">Yalla </ion-icon> 
-    </button>
+    </button> -->
   </ion-navbar>
-  <ion-content padding>
+ <!-- <ion-content padding>
     <h2>Welcome to {{userDetails.name}}</h2>
     <h3>Email: {{userDetails.email}}</h3>
     <button ion-button color="primary" (click)="logout()">Logout</button>
-  </ion-content>
+  </ion-content> -->
 </ion-header>
 <ion-content>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>

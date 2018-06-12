@@ -17,7 +17,8 @@ import { ApiServiceProvider } from '../providers/api-service/api-service';
 import { PlaceListPage } from '../pages/place-list/place-list';
 import { PostsListPage } from '../pages/posts-list/posts-list';
 import { FavListPage } from '../pages/fav-list/fav-list';
-
+import { Geolocation } from '@ionic-native/geolocation';
+import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [
     MyApp,
@@ -33,6 +34,12 @@ import { FavListPage } from '../pages/fav-list/fav-list';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
+    IonicStorageModule.forRoot({
+      name: '__yalla',
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
+        
+
+    })
   //   AgmCoreModule.forRoot({
   //    apiKey: 'AIzaSyARP_rGAxnm5haEe88zKlNfEl9TmPUbGfs'
   //  }),
@@ -53,7 +60,8 @@ import { FavListPage } from '../pages/fav-list/fav-list';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ApiServiceProvider
+    ApiServiceProvider,
+    Geolocation
   ]
 })
 export class AppModule {}

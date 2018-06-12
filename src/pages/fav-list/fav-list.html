@@ -17,8 +17,9 @@
 
 
 <ion-content padding>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <div *ngFor="let favItem of favList">
-    <ion-card>
+    <ion-card *ngIf=" searchActivated == false ">
       <button ion-item (click)="itemSelected(favItem)">
         <ion-avatar item-start>
           <img src="http://localhost:9090/stores/img/?img={{favItem.imgcover}}">
@@ -44,13 +45,15 @@
             <div>4 Comments</div>
           </button>
         </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small (click)="addToFavorite(shopItem)">
-            <ion-icon name="star-outline"></ion-icon>
-            <div>Favorite</div>
-          </button>
-        </ion-col>
       </ion-row>
     </ion-card>
   </div>
+  <ion-list *ngIf=" searchActivated == true ">
+      <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+        <ion-avatar item-start>
+          <img src="http://localhost:9090/stores/img/?img={{item.img}}">
+        </ion-avatar>
+        <h2>{{item.name}}</h2>
+      </button>
+    </ion-list>
 </ion-content>

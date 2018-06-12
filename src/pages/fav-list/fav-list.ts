@@ -17,8 +17,11 @@ import { ApiServiceProvider } from '../../providers/api-service/api-service';
 export class FavListPage {
   favData;
   favList;
+  searchActivated
+  items
   constructor(public navCtrl: NavController, public navParams: NavParams, private apiServiceProvider: ApiServiceProvider) {
   this.getFav()
+  this.searchActivated = false
   }
 
   ionViewDidLoad() {
@@ -41,5 +44,23 @@ export class FavListPage {
   }
   itemSelected(item){
     
+  }
+  initializeItems(){
+    this.items = this.favList
+  }
+  getItems(ev) {
+    // Reset items back to all of the items
+    this.initializeItems();
+    // set val to the value of the ev target
+    var val = ev.target.value;
+    this.searchActivated = true;
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    } else {
+      this.searchActivated = false;
+    }
   }
 }

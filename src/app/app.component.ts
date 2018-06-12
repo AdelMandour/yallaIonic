@@ -5,11 +5,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { CardsPage } from '../pages/cards/cards';
 import { SignupUserPage } from '../pages/signup-user/signup-user';
 import { SigninUserPage } from '../pages/signin-user/signin-user';
 import { FavListPage } from '../pages/fav-list/fav-list';
-import { OAuthService } from 'angular-oauth2-oidc';
+//import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,11 +20,11 @@ export class MyApp {
   // lng: number = 7.809007;
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = SigninUserPage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform,oauthService: OAuthService, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform/*,oauthService: OAuthService*/, public statusBar: StatusBar, public splashScreen: SplashScreen) {
    // this.initializeApp();
   //   if (oauthService.hasValidIdToken()) {
 
@@ -57,11 +56,10 @@ export class MyApp {
   // }
     // used for an example of ngFor and navigation
     this.pages = [
+      { title: 'SigninUser', component:  SigninUserPage  },
+      { title: 'SignupUser', component: SignupUserPage },
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
-      { title: 'Cards', component: CardsPage },
-      { title: 'SignupUser', component: SignupUserPage },
-      { title: 'SigninUser', component:  SigninUserPage  },
       { title: 'Favorite', component: FavListPage}
 
     ];

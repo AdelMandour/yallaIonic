@@ -17,6 +17,7 @@ export class ApiServiceProvider {
   constructor(public http: Http) {
   }
   getApiUrl: string = "http://localhost:9090/stores";
+  userUrl: string = "http://localhost:9090/users"
   getData() {
     return this.http.get(this.getApiUrl + "/getall")
       // .do((res: Response) => console.log(res.json()))
@@ -75,5 +76,56 @@ export class ApiServiceProvider {
   }
   postData(userData,page){
 
+  }
+  login(loginData){
+    let headers = new Headers(
+      {
+        'Content-Type' : 'application/json'
+      });
+    let options = new RequestOptions({ headers: headers });
+    let data = JSON.stringify({
+      email: loginData.email,
+      password: loginData.password
+    });
+    return new Promise((resolve, reject) => {
+      this.http.post(this.userUrl+"/login", data, options)
+      .toPromise()
+      .then((response) =>
+      {
+        console.log('API Response : ', response.json());
+        resolve(response.json());
+        return response.json()
+      })
+    });
+  }
+
+  signup(registerData){
+    let headers = new Headers(
+      {
+        'Content-Type' : 'application/json'
+      });
+    let options = new RequestOptions({ headers: headers });
+    let data = JSON.stringify({
+      username:registerData.username,
+      email:registerData.email,
+      password:registerData.password,
+      firstname:registerData.firstname,
+      lastname:registerData.lastname,
+      phone:registerData.phone,
+      lat:registerData.lat,
+      long:registerData.long,
+      img:registerData.img,
+      imgcover:registerData.imgcover
+    });
+    return new Promise((resolve, reject) => {
+      this.http.post(this.userUrl+"/register", data, options)
+      .toPromise()
+      .then((response) =>
+      {
+        //console.log('API Response : ', response.json());
+        resolve(response.json());
+        return response.json()
+      })
+    });
   }
 }

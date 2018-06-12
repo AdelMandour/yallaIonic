@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
 
-import { CardsPage } from '../cards/cards';
 import { AlertController } from 'ionic-angular';
 import { SigninUserPage } from '../signin-user/signin-user';
 import { PostsListPage } from '../posts-list/posts-list';
@@ -31,11 +30,11 @@ export class HomePage {
   constructor(public navCtrl: NavController, private apiServiceProvider: ApiServiceProvider,public alertCtrl: AlertController) {
     this.searchActivated = false;
     this.getPosts();
-    const data = JSON.parse(localStorage.getItem('userData'));
+   /* const data = JSON.parse(localStorage.getItem('userData'));
     this.userDetails = data.userData;
   
     this.userPostData.user_id = this.userDetails.user_id;
-    this.userPostData.token = this.userDetails.token;
+    this.userPostData.token = this.userDetails.token;*/
   }//End Constructor
 
   //start prompt
