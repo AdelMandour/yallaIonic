@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
+
+import { CardsPage } from '../cards/cards';
+import { AlertController } from 'ionic-angular';
+import { SigninUserPage } from '../signin-user/signin-user';
 import { PostsListPage } from '../posts-list/posts-list';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -16,10 +21,47 @@ export class HomePage {
   shops: Array<{ name: string, img: string }>;
   searchActivated;
   apiData;
-  constructor(public navCtrl: NavController, private apiServiceProvider: ApiServiceProvider) {
+  //dataList = [];
+  dataList;
+  userDetails : any;
+  responseData: any;
+  app;
+  userPostData = {"user_id":"","token":""};
+
+  constructor(public navCtrl: NavController, private apiServiceProvider: ApiServiceProvider,public alertCtrl: AlertController) {
     this.searchActivated = false;
-    this.getPosts()
+    this.getPosts();
+    const data = JSON.parse(localStorage.getItem('userData'));
+    this.userDetails = data.userData;
+  
+    this.userPostData.user_id = this.userDetails.user_id;
+    this.userPostData.token = this.userDetails.token;
+  }//End Constructor
+
+  //start prompt
+  doPrompt() {
+    let prompt = this.alertCtrl.create({
+      title: 'Sign In',
+      buttons: [
+        {
+          text: 'Sign In User',
+          handler: data => {
+            this.navCtrl.push(SigninUserPage);
+           // console.log('Cancel clicked');
+          }
+        }//,
+        // {
+        //   text: 'Sign In Store',
+        //   handler: data => {
+        //     //this.navCtrl.push(SigninStorePage);
+        //     //console.log('Saved clicked');
+        //   }
+        // }
+      ]
+    });
+    prompt.present();
   }
+  //end prompt
   getPosts() {
     this.apiServiceProvider.getData().subscribe((data) => {
       this.apiData = data.stores;
@@ -70,4 +112,15 @@ export class HomePage {
   addToFavorite(fav) {
     this.apiServiceProvider.makeFavorite(fav._id, "5b1cf04f4b9d4e2f94178f88")
   }
+
+  backToWelcome(){
+    const root = this.app.getRootNav();
+    root.popToRoot();
+ }
+ 
+ logout(){
+      localStorage.clear();
+      setTimeout(() => this.backToWelcome(), 1000);
+ }
+ 
 }

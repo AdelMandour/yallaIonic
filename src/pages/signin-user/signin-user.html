@@ -1,0 +1,33 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sign In User</ion-title>
+  </ion-navbar>
+</ion-header>
+      
+      <ion-content>
+      
+        <ion-list>
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="userData.email"  placeholder="Write Your Email"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="userData.password"  placeholder="Write Your Password"></ion-input>
+          </ion-item>
+           
+        </ion-list>
+      
+        <div padding>
+          <button ion-button color="primary" block > Sign In </button>
+        </div>
+
+        <div padding>
+          <button ion-button color="primary" block (click)="OpenSignupUserPage()"> Not Have Account? </button>
+        </div>
+      
+      </ion-content>
+      

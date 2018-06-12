@@ -1,0 +1,45 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sign Up User</ion-title>
+  </ion-navbar>
+</ion-header>
+      <ion-content>
+      
+        <ion-list>
+      
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="userData.email"  placeholder="Write Your Email"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-input type="text"  [(ngModel)]="userData.password" placeholder="Write Your Password"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+                <ion-input type="text" [(ngModel)]="userData.fname"  placeholder="Frist Name"></ion-input>
+          </ion-item>
+
+          <ion-item>
+                <ion-input type="text" [(ngModel)]="userData.lname"  placeholder="Last Name"></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-input type="text"  [(ngModel)]="userData.phone" placeholder="Phone"></ion-input>
+         </ion-item>
+
+        <ion-item>
+          <ion-label floating [(ngModel)]="userData.desc">Description</ion-label>
+          <ion-textarea></ion-textarea>
+        </ion-item>
+        </ion-list>
+        <div padding>
+          <button ion-button color="primary" block (click)="signup()">Sign Up</button>
+          <a href="#" (click)="login()">Sign In Page</a>
+        </div>
+      
+      </ion-content>
+      
