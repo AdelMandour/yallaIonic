@@ -1,28 +1,181 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>List</ion-title>
   </ion-navbar>
+</ion-header> -->
+<ion-header>
+  <my-header title="New Collection" Name={{name}}></my-header>
 </ion-header>
 <ion-content class="list-avatar-page">
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  <ion-list-header *ngIf=" searchActivted == false ">Place</ion-list-header>
-  <ion-list no-lines *ngIf=" searchActivted == false ">
-      <button ion-item *ngFor="let place of Places" (click)="placeSelected(place)">
-        <ion-avatar item-start>
-          <img src={{place.img}}>
-        </ion-avatar>
-        <h2>{{place.name}}</h2>
-      </button>
-    </ion-list>
-    <ion-list *ngIf=" searchActivted == true ">
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="cat">
+          <ion-segment-button value="rest">
+            <ion-icon name="md-restaurant" style="color: black;"></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="cafe">
+            <ion-icon name="cafe" style="color: black;"></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="shop">
+            <ion-icon name="basket" style="color: black;"></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="gym">
+            <img src="assets/imgs/img/gymIcon.png" style="width:50px;height: 25px;">
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+      <div [ngSwitch]="cat" *ngIf=" searchActivated == false ">
+        <ion-list *ngSwitchCase="'gym'">
+          <div *ngFor="let gymItem of gyms">
+            <ion-card>
+              <button ion-item (click)="itemSelected(gymItem)">
+                <ion-avatar item-start>
+                  <img src="http://localhost:9090/stores/img/?img={{gymItem['storeid'].img}}">
+                </ion-avatar>
+                <h2>{{gymItem['storeid'].name}}</h2>
+                <p>{{ gymItem.date | date}}</p>
+              </button>
+              <div *ngFor="let image of gymItem.img ">
+                  <img src="http://localhost:9090/stores/img/?img={{image}}">
+              </div>
+              
+              <ion-card-content>
+                <p>{{gymItem.name}}</p>
+                <p>{{gymItem.description}}</p>
+              </ion-card-content>
+              <ion-row>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>12 Likes</div>
+                  </button>
+                </ion-col>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="text"></ion-icon>
+                    <div>4 Comments</div>
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </div>
+        </ion-list>
+        <ion-list *ngSwitchCase="'rest'">
+          <div *ngFor="let restItem of rests">
+            <ion-card>
+              <button ion-item (click)="itemSelected(restItem)">
+                <ion-avatar item-start>
+                  <img src="http://localhost:9090/stores/img/?img={{restItem['storeid'].img}}">
+                </ion-avatar>
+                <h2>{{restItem['storeid'].name}}</h2>
+                <p>{{ restItem.date | date}}</p>
+              </button>
+              <div *ngFor="let image of restItem.img ">
+                  <img src="http://localhost:9090/stores/img/?img={{image}}">
+              </div>
+              
+              <ion-card-content>
+                <p>{{restItem.name}}</p>
+                <p>{{restItem.description}}</p>
+              </ion-card-content>
+              <ion-row>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>12 Likes</div>
+                  </button>
+                </ion-col>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="text"></ion-icon>
+                    <div>4 Comments</div>
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </div>
+        </ion-list>
+    
+        <ion-list *ngSwitchCase="'cafe'">
+          <div *ngFor="let cafeItem of cafes">
+            <ion-card>
+              <button ion-item (click)="itemSelected(cafeItem)">
+                <ion-avatar item-start>
+                  <img src="http://localhost:9090/stores/img/?img={{cafeItem['storeid'].img}}">
+                </ion-avatar>
+                <h2>{{cafeItem['storeid'].name}}</h2>
+                <p>{{ cafeItem.date | date}}</p>
+              </button>
+              <div *ngFor="let image of cafeItem.img ">
+                  <img src="http://localhost:9090/stores/img/?img={{image}}">
+              </div>
+              
+              <ion-card-content>
+                <p>{{cafeItem.name}}</p>
+                <p>{{cafeItem.description}}</p>
+              </ion-card-content>
+              <ion-row>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>12 Likes</div>
+                  </button>
+                </ion-col>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="text"></ion-icon>
+                    <div>4 Comments</div>
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </div>
+        </ion-list>
+        <ion-list *ngSwitchCase="'shop'">
+          <div *ngFor="let shopItem of shops">
+            <ion-card>
+              <button ion-item (click)="itemSelected(shopItem)">
+                <ion-avatar item-start>
+                  <img src="http://localhost:9090/stores/img/?img={{shopItem['storeid'].img}}">
+                </ion-avatar>
+                <h2>{{shopItem['storeid'].name}}</h2>
+                <p>{{ shopItem.date | date}}</p>
+              </button>
+              <div *ngFor="let image of shopItem.img ">
+                  <img src="http://localhost:9090/stores/img/?img={{image}}">
+              </div>
+              
+              <ion-card-content>
+                <p>{{shopItem.name}}</p>
+                <p>{{shopItem.description}}</p>
+              </ion-card-content>
+              <ion-row>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>12 Likes</div>
+                  </button>
+                </ion-col>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="text"></ion-icon>
+                    <div>4 Comments</div>
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </div>
+        </ion-list>
+      </div>
+      <ion-list *ngIf=" searchActivated == true ">
         <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-            <ion-avatar item-start>
-              <img src="http://localhost:9090/stores/img/?img={{item.img}}">
-            </ion-avatar>
-            <h2>{{item.name}}</h2>
-          </button>
+          <ion-avatar item-start>
+            <img src="http://localhost:9090/stores/img/?img={{item.img}}">
+          </ion-avatar>
+          <h2>{{item.name}}</h2>
+        </button>
       </ion-list>
 </ion-content>

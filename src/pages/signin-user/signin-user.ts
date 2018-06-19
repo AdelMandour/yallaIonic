@@ -7,6 +7,8 @@ import { ApiServiceProvider } from '../../providers/api-service/api-service';
 //import OktaAuth from '@okta/okta-auth-js';
 //import { HomePage } from '../home/home';
 import { Storage } from '@ionic/storage';
+import { ListPage } from '../list/list';
+
 
 @Component({
   selector: 'page-signin-user',
@@ -35,25 +37,18 @@ export class SigninUserPage {
     public storage: Storage) {
 
     //   this.navCtrl = navCtrl;
-    storage.get('user').then((value)=>{
-      if(value){
-       navCtrl.setRoot(HomePage)
+    storage.get('user').then((value) => {
+      if (value != null) {
+        navCtrl.setRoot(ListPage)
       }
     })
-      
+
   }
 
   signin() {
-
-    this.apiServiceProvider.login(this.userData).then((resp) => {
-      if (resp[0].err) {
-        let alert = this.alertCtrl.create({
-          title: 'Error',
-          subTitle: resp[0].err,
-          buttons: ['Dismiss']
-        });
-        alert.present();
-      } else {
+   // console.log(this.userData)
+    this.apiServiceProvider.login(this.userData).subscribe(resp => {
+      if (resp.user) {
         this.userStorage.id = resp.user['_id']
         this.userStorage.email = resp.user['email']
         this.userStorage.username = resp.user['username']
@@ -63,13 +58,25 @@ export class SigninUserPage {
         //  console.log(resp.token)  
         this.storage.set('user', this.userStorage)
         this.storage.set('token', resp.token)
-        this.navCtrl.setRoot(HomePage)
+        this.navCtrl.setRoot(ListPage)
+      } else {
+        let alert = this.alertCtrl.create({
+          title: 'Error',
+          subTitle: resp[0].err,
+          buttons: ['Dismiss']
+        });
+        alert.present();
       }
-    })
-      .catch((error) => {
 
-      });
-    
+    })
+    // this.apiServiceProvider.login(this.userData).then((resp) => {
+    //   console.log(resp) 
+
+    // })
+    //   .catch((error) => {
+
+    //   });
+
   }//endd signin()
 
   OpenSignupUserPage() {

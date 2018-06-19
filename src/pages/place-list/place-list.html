@@ -5,12 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Place List</ion-title>
-  </ion-navbar>
+  <my-header title={{placeName}}></my-header>
 </ion-header>
 <ion-content padding>
   <ion-list *ngFor="let item of apiData">

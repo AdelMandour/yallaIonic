@@ -1,10 +1,5 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Sign Up User</ion-title>
-  </ion-navbar>
+  <my-header title="signUp"></my-header>
 </ion-header>
 <ion-content>
 
@@ -13,11 +8,11 @@
       <ion-input type="text" [(ngModel)]="userData.username" placeholder="Write Your Username"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="userData.email" placeholder="Write Your Email"></ion-input>
+      <ion-input type="email" [(ngModel)]="userData.email" placeholder="Write Your Email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="userData.password" placeholder="Write Your Password"></ion-input>
+      <ion-input type="password" [(ngModel)]="userData.password" placeholder="Write Your Password"></ion-input>
     </ion-item>
 
     <ion-item>

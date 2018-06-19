@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -11,12 +11,15 @@
     <!-- <button ion-button color="light" block (click)="doPrompt()">
         <ion-icon name="heart" style="color: #cc2d2d;">Yalla </ion-icon> 
     </button> -->
-  </ion-navbar>
+  <!-- </ion-navbar> -->
  <!-- <ion-content padding>
     <h2>Welcome to {{userDetails.name}}</h2>
     <h3>Email: {{userDetails.email}}</h3>
     <button ion-button color="primary" (click)="logout()">Logout</button>
   </ion-content> -->
+<!-- </ion-header> --> 
+<ion-header>
+  <my-header title="Stores" Name={{name}}></my-header>
 </ion-header>
 <ion-content>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
@@ -54,18 +57,6 @@
           </ion-card-content>
           <ion-row>
             <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>12 Likes</div>
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon name="text"></ion-icon>
-                <div>4 Comments</div>
-              </button>
-            </ion-col>
-            <ion-col>
               <button ion-button icon-left clear small (click)="addToFavorite(gymItem)">
                 <ion-icon name="star-outline"></ion-icon>
                 <div>Favorite</div>
@@ -91,18 +82,6 @@
             <p>{{restItem.describe}}</p>
           </ion-card-content>
           <ion-row>
-            <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>12 Likes</div>
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon name="text"></ion-icon>
-                <div>4 Comments</div>
-              </button>
-            </ion-col>
             <ion-col>
               <button ion-button icon-left clear small (click)="addToFavorite(restItem)">
                 <ion-icon name="star-outline"></ion-icon>
@@ -131,18 +110,6 @@
           </ion-card-content>
           <ion-row>
             <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>12 Likes</div>
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon name="text"></ion-icon>
-                <div>4 Comments</div>
-              </button>
-            </ion-col>
-            <ion-col>
               <button ion-button icon-left clear small (click)="addToFavorite(cafeItem)">
                 <ion-icon name="star-outline"></ion-icon>
                 <div>Favorite</div>
@@ -168,18 +135,6 @@
             <p>{{shopItem.describe}}</p>
           </ion-card-content>
           <ion-row>
-            <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>12 Likes</div>
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon name="text"></ion-icon>
-                <div>4 Comments</div>
-              </button>
-            </ion-col>
             <ion-col>
               <button ion-button icon-left clear small (click)="addToFavorite(shopItem)">
                 <ion-icon name="star-outline"></ion-icon>

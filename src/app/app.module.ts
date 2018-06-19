@@ -19,6 +19,8 @@ import { PostsListPage } from '../pages/posts-list/posts-list';
 import { FavListPage } from '../pages/fav-list/fav-list';
 import { Geolocation } from '@ionic-native/geolocation';
 import { IonicStorageModule } from '@ionic/storage';
+import { MyHeaderPage } from '../components/myheader/myheader';
+import { ProfilePage } from '../pages/profile/profile';
 @NgModule({
   declarations: [
     MyApp,
@@ -27,8 +29,10 @@ import { IonicStorageModule } from '@ionic/storage';
     PlaceListPage,
     SignupUserPage,
     SigninUserPage,
+    MyHeaderPage,
     PostsListPage,
-    FavListPage
+    FavListPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -54,14 +58,17 @@ import { IonicStorageModule } from '@ionic/storage';
     SignupUserPage,
     SigninUserPage,
     PostsListPage,
-    FavListPage
+    FavListPage,
+    MyHeaderPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiServiceProvider,
-    Geolocation
+    Geolocation,
+    MyHeaderPage
   ]
 })
 export class AppModule {}

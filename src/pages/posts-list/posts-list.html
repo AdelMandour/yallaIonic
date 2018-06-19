@@ -5,26 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>{{storeName}}</ion-title>
-  </ion-navbar>
-
+  <my-header title={{storeName}}></my-header>
 </ion-header>
 <ion-content padding>
   <ion-list *ngFor="let content of contents">
     <ion-card>
-      <button ion-item (click)="itemSelected(content)">
+      <ion-item>
         <ion-avatar item-start>
           <img src="http://localhost:9090/stores/img/?img={{store.imgcover}}">
         </ion-avatar>
         <h2>{{store.name}}</h2>
         <h3>{{content.name}}</h3>
         <p>{{content.date | date}}</p>
-      </button>
+      </ion-item>
       <div *ngFor="let image of content.img">
         <img src="http://localhost:9090/stores/img/?img={{image}}">
       </div>

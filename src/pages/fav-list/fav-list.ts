@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
-
+import { Storage } from '@ionic/storage';
+import { SigninUserPage } from '../signin-user/signin-user';
+import { PostsListPage } from '../posts-list/posts-list';
 /**
  * Generated class for the FavListPage page.
  *
@@ -19,9 +21,21 @@ export class FavListPage {
   favList;
   searchActivated
   items
-  constructor(public navCtrl: NavController, public navParams: NavParams, private apiServiceProvider: ApiServiceProvider) {
-  this.getFav()
-  this.searchActivated = false
+  name
+  constructor(private storage: Storage,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private apiServiceProvider: ApiServiceProvider) {
+    storage.get("user").then((user) => {
+      if (user) {
+        this.name = user.username
+        this.getFav()
+        this.searchActivated = false
+      } else {
+        navCtrl.setRoot(SigninUserPage)
+      }
+    })
+
   }
 
   ionViewDidLoad() {
@@ -31,36 +45,44 @@ export class FavListPage {
     this.apiServiceProvider.getFavorites("5b1cf04f4b9d4e2f94178f88").subscribe((data) => {
       this.favData = data.allfavorite;
       this.favData.forEach(element => {
-        this.apiServiceProvider.getStore(element.storeid._id).subscribe((data) => {
-          console.log(data)
+        if(element['storeid']){
+          // console.log(element)
+        this.apiServiceProvider.getStore(element['storeid']._id).subscribe((data) => {
+          // console.log(data)
           if (data[1]) {
+            data[1].store[0]._id = element['storeid']._id
+            // console.log(data[1].store[0])
             this.favList.push(data[1].store[0])
           } else {
+            data[0].store[0]._id = element['storeid']._id
+            // console.log(data[0].store[0])
             this.favList.push(data[0].store[0])
           }
         })
+      }
       });
     });
   }
-  itemSelected(item){
-    
+  itemSelected(item) {
+    // console.log(item)
+    this.navCtrl.push(PostsListPage, { storeId: item._id, storeName: item.name })
   }
-  initializeItems(){
+  initializeItems() {
     this.items = this.favList
   }
   getItems(ev) {
-    // Reset items back to all of the items
-    this.initializeItems();
-    // set val to the value of the ev target
-    var val = ev.target.value;
-    this.searchActivated = true;
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    } else {
-      this.searchActivated = false;
-    }
+     // Reset items back to all of the items
+     this.initializeItems();
+     // set val to the value of the ev target
+     var val = ev.target.value;
+     this.searchActivated = true;
+     // if the value is an empty string don't filter the items
+     if (val && val.trim() != '') {
+       this.items = this.items.filter((item) => {
+         return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+       })
+     } else {
+       this.searchActivated = false;
   }
+}
 }

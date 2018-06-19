@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
-
+import { Storage } from '@ionic/storage';
 import { AlertController } from 'ionic-angular';
 import { SigninUserPage } from '../signin-user/signin-user';
 import { PostsListPage } from '../posts-list/posts-list';
@@ -25,11 +25,24 @@ export class HomePage {
   userDetails : any;
   responseData: any;
   app;
+  name
   userPostData = {"user_id":"","token":""};
 
-  constructor(public navCtrl: NavController, private apiServiceProvider: ApiServiceProvider,public alertCtrl: AlertController) {
-    this.searchActivated = false;
-    this.getPosts();
+  constructor(private storage: Storage,
+    public navCtrl: NavController, 
+    private apiServiceProvider: ApiServiceProvider,
+    public alertCtrl: AlertController) {
+    storage.get("user").then((user) => {
+      if (user) {
+        this.name = user.username
+        this.searchActivated = false;
+        this.getPosts();
+      } else {
+        navCtrl.setRoot(SigninUserPage)
+      }
+    })
+    
+
    /* const data = JSON.parse(localStorage.getItem('userData'));
     this.userDetails = data.userData;
   

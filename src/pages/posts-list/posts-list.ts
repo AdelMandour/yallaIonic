@@ -28,15 +28,20 @@ export class PostsListPage {
 
   ionViewDidLoad() {
   }
-  loadData(){
+  loadData() {
     this.apiServiceProvider.getStore(this.storeId).subscribe((data) => {
       this.apiData = data;
-      this.contents = this.apiData[0].contents
-      this.store = this.apiData[1].store[0]
-    });
-  }
-  itemSelected(object){
+      // console.log(this.apiData)
+      if (this.apiData[0]) {
+        var firstElement = this.apiData[0]
+        this.contents = firstElement.contents
+      }
+      if (this.apiData[1]) {
+        var secondElement = this.apiData[1]
+        this.store = secondElement.store[0]
+      }
 
+    });
   }
 
 }

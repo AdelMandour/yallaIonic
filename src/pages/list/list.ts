@@ -3,56 +3,76 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
 import { PlaceListPage } from '../place-list/place-list';
 import { PostsListPage } from '../posts-list/posts-list';
+import { Storage } from '@ionic/storage';
+import { SigninUserPage } from '../signin-user/signin-user';
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
 export class ListPage {
-  Places: Array<{ name: string, img: string }>;
   items;
-  searchActivted;
+  searchActivated;
   apiData;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiServiceProvider: ApiServiceProvider) {
-    this.searchActivted  = false
+  cat: string = "rest";
+  gyms: Array<{ name: string, img: string }>;
+  rests: Array<{ name: string, img: string }>;
+  cafes: Array<{ name: string, img: string }>;
+  shops: Array<{ name: string, img: string }>;
+  name
+  constructor(private storage: Storage,
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public apiServiceProvider: ApiServiceProvider) {
+    storage.get("user").then((user) => {
+      if (user) {
+        this.searchActivated  = false
     this.getPosts()
+        this.name = user.username;
+      } else {
+        navCtrl.setRoot(SigninUserPage)
+      }
+    })
+    
   }
   getPosts() {
     this.apiServiceProvider.getData().subscribe((data) => {
       this.apiData = data.stores;
-      this.initializeItems();
+      // console.log(this.apiData)
+    // this.initializeItems();
     });
+    this.apiServiceProvider.getCollection(1).subscribe((data)=>{
+      this.cafes = data
+      // console.log(this.cafes)
+      
+    })
+    this.apiServiceProvider.getCollection(2).subscribe((data)=>{
+      this.rests = data
+      // console.log(this.rests)
+    })
+    this.apiServiceProvider.getCollection(3).subscribe((data)=>{
+      this.shops = data
+    })
+    this.apiServiceProvider.getCollection(4).subscribe((data)=>{
+      this.gyms = data
+    })
+
   }
   initializeItems() {
-    this.Places = []
     this.items = []
-    this.Places.push({
-      name: "cafe",
-      img: "assets/imgs/img/coffee.png"
-    });
-    this.Places.push({
-      name: "rest",
-      img: "assets/imgs/img/rest.png"
-    });
-    this.Places.push({
-      name: "store",
-      img: "assets/imgs/img/store.png"
-    });
-    this.Places.push({
-      name: "gym",
-      img: "assets/imgs/img/gym.png"
-    });
-    this.items = this.apiData
-  }
+  this.items = this.apiData
+}
   placeSelected(place){
     this.navCtrl.push(PlaceListPage,{placeName:place.name})
   }
   itemSelected(item) {
-    this.navCtrl.push(PostsListPage,{storeId:item._id,storeName:item.name})
+    // console.log(item)
+    this.navCtrl.push(PostsListPage,{storeId:item['storeid']._id,storeName:item['storeid'].name})
   }
   getItems(ev) {
     // Reset items back to all of the items
+   // console.log(this.items)
     this.initializeItems();
-    this.searchActivted = true;
+    this.searchActivated = true;
     // set val to the value of the ev target
     var val = ev.target.value;
 
@@ -62,7 +82,7 @@ export class ListPage {
         return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }else{
-      this.searchActivted  = false
+      this.searchActivated  = false
     }
   }
 }

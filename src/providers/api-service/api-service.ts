@@ -1,4 +1,4 @@
-import { Http, Headers,RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import 'rxjs/add/operator/do';
@@ -43,10 +43,10 @@ export class ApiServiceProvider {
       // .do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json())
   }
-  makeFavorite(store,user) {
+  makeFavorite(store, user) {
     let headers = new Headers(
       {
-        'Content-Type' : 'application/json'
+        'Content-Type': 'application/json'
       });
     let options = new RequestOptions({ headers: headers });
     let data = JSON.stringify({
@@ -54,78 +54,83 @@ export class ApiServiceProvider {
       userid: user
     });
     return new Promise((resolve, reject) => {
-      this.http.post(this.getApiUrl+"/makefavour", data, options)
-      .toPromise()
-      .then((response) =>
-      {
-       // console.log('API Response : ', response.json());
-        resolve(response.json());
-      })
-      .catch((error) =>
-      {
-       // console.error('API Error : ', error.status);
-       // console.error('API Error : ', JSON.stringify(error));
-        reject(error.json());
-      });
+      this.http.post(this.getApiUrl + "/makefavour", data, options)
+        .toPromise()
+        .then((response) => {
+          // console.log('API Response : ', response.json());
+          resolve(response.json());
+        })
+        .catch((error) => {
+          // console.error('API Error : ', error.status);
+          // console.error('API Error : ', JSON.stringify(error));
+          reject(error.json());
+        });
     });
   }
-  getFavorites(userId){
+  getFavorites(userId) {
     return this.http.get(this.getApiUrl + "/favour/" + userId)
       // .do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json())
   }
-  postData(userData,page){
+  postData(userData, page) {
 
   }
-  login(loginData){
+  login(loginData) {
     let headers = new Headers(
       {
-        'Content-Type' : 'application/json'
+        'Content-Type': 'application/json',
       });
     let options = new RequestOptions({ headers: headers });
     let data = JSON.stringify({
       email: loginData.email,
       password: loginData.password
     });
-    return new Promise((resolve, reject) => {
-      this.http.post(this.userUrl+"/login", data, options)
-      .toPromise()
-      .then((response) =>
-      {
-        console.log('API Response : ', response.json());
-        resolve(response.json());
-        return response.json()
-      })
-    });
+    // return new Promise((resolve, reject) => {
+    return this.http.post(this.userUrl + "/login", data, options).map(res => res.json())
+    //   .toPromise()
+    //   .then((response) =>
+    //   {
+    //     console.log('API Response : ', response.json());
+    //     resolve(response.json());
+    //    // return response.json()
+    //   })
+    // });
   }
 
-  signup(registerData){
+  signup(registerData) {
     let headers = new Headers(
       {
-        'Content-Type' : 'application/json'
+        'Content-Type': 'application/json'
       });
     let options = new RequestOptions({ headers: headers });
     let data = JSON.stringify({
-      username:registerData.username,
-      email:registerData.email,
-      password:registerData.password,
-      firstname:registerData.firstname,
-      lastname:registerData.lastname,
-      phone:registerData.phone,
-      lat:registerData.lat,
-      long:registerData.long,
-      img:registerData.img,
-      imgcover:registerData.imgcover
+      username: registerData.username,
+      email: registerData.email,
+      password: registerData.password,
+      firstname: registerData.firstname,
+      lastname: registerData.lastname,
+      phone: registerData.phone,
+      lat: registerData.lat,
+      long: registerData.long,
+      img: registerData.img,
+      imgcover: registerData.imgcover
     });
-    return new Promise((resolve, reject) => {
-      this.http.post(this.userUrl+"/register", data, options)
-      .toPromise()
-      .then((response) =>
-      {
-        //console.log('API Response : ', response.json());
-        resolve(response.json());
-        return response.json()
-      })
-    });
+    // return new Promise((resolve, reject) => {
+    return this.http.post(this.userUrl + "/register", data, options).map(res => res.json())
+    // .toPromise()
+    // .then((response) =>
+    // {
+    //   //console.log('API Response : ', response.json());
+    //   resolve(response.json());
+    //   return response.json()
+    // })
+    //  });
+  }
+  getCollection(catID){
+    let headers = new Headers();
+      headers.append('Content-Type','application/json')
+      headers.append('category',catID)
+      let options = new RequestOptions({ headers: headers });
+      return this.http.get(this.getApiUrl + "/newcollection", options).map(res => res.json())
   }
 }
