@@ -14,12 +14,12 @@
     <ion-card *ngIf=" searchActivated == false ">
       <button ion-item (click)="itemSelected(favItem)">
         <ion-avatar item-start>
-          <img src="http://localhost:9090/stores/img/?img={{favItem.imgcover}}">
+          <img src="http://localhost:9090/users/img/{{favItem.imgcover}}">
         </ion-avatar>
         <h2>{{favItem.name}}</h2>
         <p>{{favItem.date}}</p>
       </button>
-      <img src="http://localhost:9090/stores/img/?img={{favItem.img}}">
+      <img src="http://localhost:9090/users/img/{{favItem.img}}">
       <ion-card-content>
         <p>{{favItem.address}}</p>
         <p>{{favItem.describe}}</p>
@@ -31,7 +31,7 @@
   <ion-list *ngIf=" searchActivated == true ">
       <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
         <ion-avatar item-start>
-          <img src="http://localhost:9090/stores/img/?img={{item.img}}">
+          <img src="http://localhost:9090/users/img/{{item.img}}">
         </ion-avatar>
         <h2>{{item.name}}</h2>
       </button>

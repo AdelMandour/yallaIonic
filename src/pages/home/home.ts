@@ -119,6 +119,7 @@ export class HomePage {
     }
   }
   itemSelected(item) {
+   // console.log(item)
     this.navCtrl.push(PostsListPage, { storeId: item._id, storeName: item.name })
   }
   addToFavorite(fav) {

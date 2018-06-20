@@ -45,12 +45,12 @@
         <ion-card>
           <button ion-item (click)="itemSelected(gymItem)">
             <ion-avatar item-start>
-              <img src="http://localhost:9090/stores/img/?img={{gymItem.imgcover}}">
+              <img src="http://localhost:9090/users/img/{{gymItem.imgcover}}">
             </ion-avatar>
             <h2>{{gymItem.name}}</h2>
             <p>{{gymItem.date | date}}</p>
           </button>
-          <img src="http://localhost:9090/stores/img/?img={{gymItem.img}}">
+          <img src="http://localhost:9090/users/img/{{gymItem.img}}">
           <ion-card-content>
             <p>{{gymItem.address}}</p>
             <p>{{gymItem.describe}}</p>
@@ -71,12 +71,12 @@
         <ion-card>
           <button ion-item (click)="itemSelected(restItem)">
             <ion-avatar item-start>
-              <img src="http://localhost:9090/stores/img/?img={{restItem.imgcover}}">
+              <img src="http://localhost:9090/users/img/{{restItem.imgcover}}">
             </ion-avatar>
             <h2>{{restItem.name}}</h2>
             <p>{{restItem.date | date}}</p>
           </button>
-          <img src="http://localhost:9090/stores/img/?img={{restItem.img}}">
+          <img src="http://localhost:9090/users/img/{{restItem.img}}">
           <ion-card-content>
             <p>{{restItem.address}}</p>
             <p>{{restItem.describe}}</p>
@@ -98,12 +98,12 @@
         <ion-card>
           <button ion-item (click)="itemSelected(cafeItem)">
             <ion-avatar item-start>
-              <img src="http://localhost:9090/stores/img/?img={{cafeItem.imgcover}}">
+              <img src="http://localhost:9090/users/img/{{cafeItem.imgcover}}">
             </ion-avatar>
             <h2>{{cafeItem.name}}</h2>
             <p>{{cafeItem.date | date}}</p>
           </button>
-          <img src="http://localhost:9090/stores/img/?img={{cafeItem.img}}">
+          <img src="http://localhost:9090/users/img/{{cafeItem.img}}">
           <ion-card-content>
             <p>{{cafeItem.address}}</p>
             <p>{{cafeItem.describe}}</p>
@@ -124,12 +124,12 @@
         <ion-card>
           <button ion-item (click)="itemSelected(shopItem)">
             <ion-avatar item-start>
-              <img src="http://localhost:9090/stores/img/?img={{shopItem.imgcover}}">
+              <img src="http://localhost:9090/users/img/{{shopItem.imgcover}}">
             </ion-avatar>
             <h2>{{shopItem.name}}</h2>
             <p>{{shopItem.date | date}}</p>
           </button>
-          <img src="http://localhost:9090/stores/img/?img={{shopItem.img}}">
+          <img src="http://localhost:9090/users/img/{{shopItem.img}}">
           <ion-card-content>
             <p>{{shopItem.address}}</p>
             <p>{{shopItem.describe}}</p>
@@ -149,7 +149,7 @@
   <ion-list *ngIf=" searchActivated == true ">
     <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
       <ion-avatar item-start>
-        <img src="http://localhost:9090/stores/img/?img={{item.img}}">
+        <img src="http://localhost:9090/users/img/{{item.img}}">
       </ion-avatar>
       <h2>{{item.name}}</h2>
     </button>

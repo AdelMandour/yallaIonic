@@ -28,16 +28,6 @@ export class ApiServiceProvider {
       // .do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json())
   }
-  getLikes() {
-    return this.http.get(this.getApiUrl + "/getstoreofcategory/")
-      // .do((res: Response) => console.log(res.json()))
-      .map((res: Response) => res.json())
-  }
-  getComments() {
-    return this.http.get(this.getApiUrl + "/getstoreofcategory/")
-      // .do((res: Response) => console.log(res.json()))
-      .map((res: Response) => res.json())
-  }
   getStore(storeID) {
     return this.http.get(this.getApiUrl + "/getstore/" + storeID)
       // .do((res: Response) => console.log(res.json()))
@@ -132,5 +122,36 @@ export class ApiServiceProvider {
       headers.append('category',catID)
       let options = new RequestOptions({ headers: headers });
       return this.http.get(this.getApiUrl + "/newcollection", options).map(res => res.json())
+  }
+  addLike(content,stat,user){
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+    let options = new RequestOptions({ headers: headers });
+    let data = JSON.stringify({
+      status:stat,
+      userid:user
+    })
+    return this.http.put(this.getApiUrl + "/addlike/"+content, data, options).map(res => res.json())
+  }
+  getComment(postID){
+    return this.http.get(this.getApiUrl + "/getfeedback/" + postID)
+      // .do((res: Response) => console.log(res.json()))
+      .map((res: Response) => res.json())
+  }
+  addComment(storeID,userID,contentID,contentmsg){
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+      let options = new RequestOptions({ headers: headers });
+    let data = JSON.stringify({
+      storeid:storeID,
+      userid:userID,
+      contentid:contentID,
+      content:contentmsg
+    })
+    return this.http.post(this.getApiUrl + "/addfeedback", data, options).map(res => res.json())
   }
 }

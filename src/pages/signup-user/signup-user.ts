@@ -53,7 +53,7 @@ export class SignupUserPage {
       this.userData.img = "94135.jpg"
       this.userData.imgcover = "94135.jpg"
       this.apiServiceProvider.signup(this.userData).subscribe(resp => {
-         console.log(resp)
+         //console.log(resp)
          if(resp['user']){
           this.userStorage.id = resp.user['_id']
         this.userStorage.email = resp.user['email']

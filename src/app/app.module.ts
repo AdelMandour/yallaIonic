@@ -21,6 +21,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { IonicStorageModule } from '@ionic/storage';
 import { MyHeaderPage } from '../components/myheader/myheader';
 import { ProfilePage } from '../pages/profile/profile';
+import { PostViewPage } from '../pages/post-view/post-view';
+import { CommentPage } from '../pages/comment/comment';
 @NgModule({
   declarations: [
     MyApp,
@@ -32,7 +34,9 @@ import { ProfilePage } from '../pages/profile/profile';
     MyHeaderPage,
     PostsListPage,
     FavListPage,
-    ProfilePage
+    ProfilePage,
+    PostViewPage,
+    CommentPage
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,9 @@ import { ProfilePage } from '../pages/profile/profile';
     PostsListPage,
     FavListPage,
     MyHeaderPage,
-    ProfilePage
+    ProfilePage,
+    PostViewPage,
+    CommentPage
   ],
   providers: [
     StatusBar,

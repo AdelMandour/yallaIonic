@@ -33,13 +33,13 @@
             <ion-card>
               <button ion-item (click)="itemSelected(gymItem)">
                 <ion-avatar item-start>
-                  <img src="http://localhost:9090/stores/img/?img={{gymItem['storeid'].img}}">
+                  <img src="http://localhost:9090/users/img/{{gymItem['storeid'].img}}">
                 </ion-avatar>
                 <h2>{{gymItem['storeid'].name}}</h2>
                 <p>{{ gymItem.date | date}}</p>
               </button>
               <div *ngFor="let image of gymItem.img ">
-                  <img src="http://localhost:9090/stores/img/?img={{image}}">
+                  <img src="http://localhost:9090/users/img/{{image}}">
               </div>
               
               <ion-card-content>
@@ -68,13 +68,13 @@
             <ion-card>
               <button ion-item (click)="itemSelected(restItem)">
                 <ion-avatar item-start>
-                  <img src="http://localhost:9090/stores/img/?img={{restItem['storeid'].img}}">
+                  <img src="http://localhost:9090/users/img/{{restItem['storeid'].img}}">
                 </ion-avatar>
                 <h2>{{restItem['storeid'].name}}</h2>
                 <p>{{ restItem.date | date}}</p>
               </button>
               <div *ngFor="let image of restItem.img ">
-                  <img src="http://localhost:9090/stores/img/?img={{image}}">
+                  <img src="http://localhost:9090/users/img/{{image}}">
               </div>
               
               <ion-card-content>
@@ -104,13 +104,13 @@
             <ion-card>
               <button ion-item (click)="itemSelected(cafeItem)">
                 <ion-avatar item-start>
-                  <img src="http://localhost:9090/stores/img/?img={{cafeItem['storeid'].img}}">
+                  <img src="http://localhost:9090/users/img/{{cafeItem['storeid'].img}}">
                 </ion-avatar>
                 <h2>{{cafeItem['storeid'].name}}</h2>
                 <p>{{ cafeItem.date | date}}</p>
               </button>
               <div *ngFor="let image of cafeItem.img ">
-                  <img src="http://localhost:9090/stores/img/?img={{image}}">
+                  <img src="http://localhost:9090/users/img/{{image}}">
               </div>
               
               <ion-card-content>
@@ -139,13 +139,13 @@
             <ion-card>
               <button ion-item (click)="itemSelected(shopItem)">
                 <ion-avatar item-start>
-                  <img src="http://localhost:9090/stores/img/?img={{shopItem['storeid'].img}}">
+                  <img src="http://localhost:9090/users/img/{{shopItem['storeid'].img}}">
                 </ion-avatar>
                 <h2>{{shopItem['storeid'].name}}</h2>
                 <p>{{ shopItem.date | date}}</p>
               </button>
               <div *ngFor="let image of shopItem.img ">
-                  <img src="http://localhost:9090/stores/img/?img={{image}}">
+                  <img src="http://localhost:9090/users/img/{{image}}">
               </div>
               
               <ion-card-content>
@@ -173,7 +173,7 @@
       <ion-list *ngIf=" searchActivated == true ">
         <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
           <ion-avatar item-start>
-            <img src="http://localhost:9090/stores/img/?img={{item.img}}">
+            <img src="http://localhost:9090/users/img/{{item.img}}">
           </ion-avatar>
           <h2>{{item.name}}</h2>
         </button>

@@ -12,12 +12,12 @@
     <ion-card>
       <button ion-item (click)="itemSelected(item)">
         <ion-avatar item-start>
-          <img src="http://localhost:9090/stores/img/?img={{item.imgcover}}">
+          <img src="http://localhost:9090/users/img/{{item.imgcover}}">
         </ion-avatar>
         <h2>{{item.name}}</h2>
         <p>{{item.date | date}}</p>
       </button>
-      <img src="http://localhost:9090/stores/img/?img={{item.img}}">
+      <img src="http://localhost:9090/users/img/{{item.img}}">
       <ion-card-content>
         <p>{{item.address}}</p>
         <p>{{item.describe}}</p>

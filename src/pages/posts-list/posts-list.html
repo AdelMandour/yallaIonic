@@ -9,36 +9,25 @@
 </ion-header>
 <ion-content padding>
   <ion-list *ngFor="let content of contents">
-    <ion-card>
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="http://localhost:9090/stores/img/?img={{store.imgcover}}">
-        </ion-avatar>
-        <h2>{{store.name}}</h2>
-        <h3>{{content.name}}</h3>
-        <p>{{content.date | date}}</p>
-      </ion-item>
-      <div *ngFor="let image of content.img">
-        <img src="http://localhost:9090/stores/img/?img={{image}}">
-      </div>
-      <ion-card-content>
-        <p>{{store.address}}</p>
-        <p>{{content.description}}</p>
-      </ion-card-content>
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>12 Likes</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="text"></ion-icon>
-            <div>4 Comments</div>
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
+    <button (click)="showPost(content)">
+      <ion-card>
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="http://localhost:9090/users/img/{{store.imgcover}}">
+          </ion-avatar>
+          <h2>{{store.name}}</h2>
+          <h3>{{content.name}}</h3>
+          <p>{{content.date | date}}</p>
+        </ion-item>
+        <div *ngFor="let image of content.img">
+          <ion-avatar item-start>
+            <img src="http://localhost:9090/users/img/{{image}}">
+          </ion-avatar>
+        </div>
+        <ion-card-content>
+          <p>{{store.address}}</p>
+        </ion-card-content>
+      </ion-card>
+    </button>
   </ion-list>
 </ion-content>
