@@ -5,6 +5,7 @@ import { PlaceListPage } from '../place-list/place-list';
 import { PostsListPage } from '../posts-list/posts-list';
 import { Storage } from '@ionic/storage';
 import { SigninUserPage } from '../signin-user/signin-user';
+import { PostViewPage } from '../post-view/post-view';
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
@@ -65,8 +66,8 @@ export class ListPage {
     this.navCtrl.push(PlaceListPage,{placeName:place.name})
   }
   itemSelected(item) {
-    // console.log(item)
-    this.navCtrl.push(PostsListPage,{storeId:item['storeid']._id,storeName:item['storeid'].name})
+    console.log(item)
+    this.navCtrl.push(PostsListPage,{storeId:item._id,storeName:item.name})
   }
   getItems(ev) {
     // Reset items back to all of the items
@@ -84,5 +85,8 @@ export class ListPage {
     }else{
       this.searchActivated  = false
     }
+  }
+  showPost(content){
+    this.navCtrl.push(PostViewPage,{post:content,store:content.storeid})
   }
 }

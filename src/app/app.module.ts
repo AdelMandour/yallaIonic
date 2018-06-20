@@ -23,6 +23,9 @@ import { MyHeaderPage } from '../components/myheader/myheader';
 import { ProfilePage } from '../pages/profile/profile';
 import { PostViewPage } from '../pages/post-view/post-view';
 import { CommentPage } from '../pages/comment/comment';
+// Import ionic2-rating module
+import { Ionic2RatingModule } from 'ionic2-rating';
+import { ImagePage } from '../pages/image/image';
 @NgModule({
   declarations: [
     MyApp,
@@ -36,7 +39,8 @@ import { CommentPage } from '../pages/comment/comment';
     FavListPage,
     ProfilePage,
     PostViewPage,
-    CommentPage
+    CommentPage,
+    ImagePage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,8 @@ import { CommentPage } from '../pages/comment/comment';
       driverOrder: ['indexeddb', 'sqlite', 'websql']
         
 
-    })
+    }),
+    Ionic2RatingModule // Put ionic2-rating module here
   //   AgmCoreModule.forRoot({
   //    apiKey: 'AIzaSyARP_rGAxnm5haEe88zKlNfEl9TmPUbGfs'
   //  }),
@@ -66,7 +71,8 @@ import { CommentPage } from '../pages/comment/comment';
     MyHeaderPage,
     ProfilePage,
     PostViewPage,
-    CommentPage
+    CommentPage,
+    ImagePage
   ],
   providers: [
     StatusBar,

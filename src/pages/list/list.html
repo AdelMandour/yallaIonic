@@ -30,6 +30,7 @@
       <div [ngSwitch]="cat" *ngIf=" searchActivated == false ">
         <ion-list *ngSwitchCase="'gym'">
           <div *ngFor="let gymItem of gyms">
+              <button (click)="showPost(gymItem)">
             <ion-card>
               <button ion-item (click)="itemSelected(gymItem)">
                 <ion-avatar item-start>
@@ -46,25 +47,13 @@
                 <p>{{gymItem.name}}</p>
                 <p>{{gymItem.description}}</p>
               </ion-card-content>
-              <ion-row>
-                <ion-col>
-                  <button ion-button icon-left clear small>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <div>12 Likes</div>
-                  </button>
-                </ion-col>
-                <ion-col>
-                  <button ion-button icon-left clear small>
-                    <ion-icon name="text"></ion-icon>
-                    <div>4 Comments</div>
-                  </button>
-                </ion-col>
-              </ion-row>
             </ion-card>
+          </button>
           </div>
         </ion-list>
         <ion-list *ngSwitchCase="'rest'">
           <div *ngFor="let restItem of rests">
+              <button (click)="showPost(restItem)">
             <ion-card>
               <button ion-item (click)="itemSelected(restItem)">
                 <ion-avatar item-start>
@@ -81,26 +70,14 @@
                 <p>{{restItem.name}}</p>
                 <p>{{restItem.description}}</p>
               </ion-card-content>
-              <ion-row>
-                <ion-col>
-                  <button ion-button icon-left clear small>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <div>12 Likes</div>
-                  </button>
-                </ion-col>
-                <ion-col>
-                  <button ion-button icon-left clear small>
-                    <ion-icon name="text"></ion-icon>
-                    <div>4 Comments</div>
-                  </button>
-                </ion-col>
-              </ion-row>
             </ion-card>
+            </button>
           </div>
         </ion-list>
     
         <ion-list *ngSwitchCase="'cafe'">
           <div *ngFor="let cafeItem of cafes">
+              <button (click)="showPost(cafeItem)">
             <ion-card>
               <button ion-item (click)="itemSelected(cafeItem)">
                 <ion-avatar item-start>
@@ -117,25 +94,13 @@
                 <p>{{cafeItem.name}}</p>
                 <p>{{cafeItem.description}}</p>
               </ion-card-content>
-              <ion-row>
-                <ion-col>
-                  <button ion-button icon-left clear small>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <div>12 Likes</div>
-                  </button>
-                </ion-col>
-                <ion-col>
-                  <button ion-button icon-left clear small>
-                    <ion-icon name="text"></ion-icon>
-                    <div>4 Comments</div>
-                  </button>
-                </ion-col>
-              </ion-row>
             </ion-card>
+            </button>
           </div>
         </ion-list>
         <ion-list *ngSwitchCase="'shop'">
           <div *ngFor="let shopItem of shops">
+              <button (click)="showPost(shopItem)">
             <ion-card>
               <button ion-item (click)="itemSelected(shopItem)">
                 <ion-avatar item-start>
@@ -152,21 +117,8 @@
                 <p>{{shopItem.name}}</p>
                 <p>{{shopItem.description}}</p>
               </ion-card-content>
-              <ion-row>
-                <ion-col>
-                  <button ion-button icon-left clear small>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <div>12 Likes</div>
-                  </button>
-                </ion-col>
-                <ion-col>
-                  <button ion-button icon-left clear small>
-                    <ion-icon name="text"></ion-icon>
-                    <div>4 Comments</div>
-                  </button>
-                </ion-col>
-              </ion-row>
             </ion-card>
+            </button>
           </div>
         </ion-list>
       </div>

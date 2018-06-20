@@ -7,17 +7,17 @@
     <!-- <button ion-button icon-only>
       <ion-icon name="home">Home </ion-icon>
     </button> -->
-    <!--  block (click)="doPrompt()" -->
-    <!-- <button ion-button color="light" block (click)="doPrompt()">
+<!--  block (click)="doPrompt()" -->
+<!-- <button ion-button color="light" block (click)="doPrompt()">
         <ion-icon name="heart" style="color: #cc2d2d;">Yalla </ion-icon> 
     </button> -->
-  <!-- </ion-navbar> -->
- <!-- <ion-content padding>
+<!-- </ion-navbar> -->
+<!-- <ion-content padding>
     <h2>Welcome to {{userDetails.name}}</h2>
     <h3>Email: {{userDetails.email}}</h3>
     <button ion-button color="primary" (click)="logout()">Logout</button>
   </ion-content> -->
-<!-- </ion-header> --> 
+<!-- </ion-header> -->
 <ion-header>
   <my-header title="Stores" Name={{name}}></my-header>
 </ion-header>
@@ -56,6 +56,15 @@
             <p>{{gymItem.describe}}</p>
           </ion-card-content>
           <ion-row>
+            <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+              nullable="false" (ngModelChange)="onModelChange($event,gymItem)">
+              <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
+            </rating>
+            <ion-note>
+
+              TotalRate {{gymItem.rate}}
+              <ion-icon ios="ios-star" md="md-star"></ion-icon>
+            </ion-note>
             <ion-col>
               <button ion-button icon-left clear small (click)="addToFavorite(gymItem)">
                 <ion-icon name="star-outline"></ion-icon>
@@ -82,6 +91,14 @@
             <p>{{restItem.describe}}</p>
           </ion-card-content>
           <ion-row>
+            <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+              nullable="false" (ngModelChange)="onModelChange($event,restItem)">
+              <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
+            </rating>
+            <ion-note>
+              TotalRate {{restItem.rate}}
+              <ion-icon ios="ios-star" md="md-star"></ion-icon>
+            </ion-note>
             <ion-col>
               <button ion-button icon-left clear small (click)="addToFavorite(restItem)">
                 <ion-icon name="star-outline"></ion-icon>
@@ -109,6 +126,14 @@
             <p>{{cafeItem.describe}}</p>
           </ion-card-content>
           <ion-row>
+            <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+              nullable="false" (ngModelChange)="onModelChange($event,cafeItem)">
+              <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
+            </rating>
+            <ion-note>
+              TotalRate {{cafeItem.rate}}
+              <ion-icon ios="ios-star" md="md-star"></ion-icon>
+            </ion-note>
             <ion-col>
               <button ion-button icon-left clear small (click)="addToFavorite(cafeItem)">
                 <ion-icon name="star-outline"></ion-icon>
@@ -135,6 +160,14 @@
             <p>{{shopItem.describe}}</p>
           </ion-card-content>
           <ion-row>
+            <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"
+              nullable="false" (ngModelChange)="onModelChange($event,shopItem)">
+              <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
+            </rating>
+            <ion-note>
+              TotalRate {{shopItem.rate}}
+              <ion-icon ios="ios-star" md="md-star"></ion-icon>
+            </ion-note>
             <ion-col>
               <button ion-button icon-left clear small (click)="addToFavorite(shopItem)">
                 <ion-icon name="star-outline"></ion-icon>

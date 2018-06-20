@@ -27,14 +27,16 @@ export class HomePage {
   app;
   name
   userPostData = {"user_id":"","token":""};
-
+  rate
+  user
   constructor(private storage: Storage,
     public navCtrl: NavController, 
     private apiServiceProvider: ApiServiceProvider,
     public alertCtrl: AlertController) {
-    storage.get("user").then((user) => {
-      if (user) {
-        this.name = user.username
+    storage.get("user").then((userdata) => {
+      if (userdata) {
+        this.name = userdata.username
+        this.user = userdata
         this.searchActivated = false;
         this.getPosts();
       } else {
@@ -88,16 +90,62 @@ export class HomePage {
     this.shops = []
     for (let index = 0; index < this.apiData.length; index++) {
       if (this.apiData[index].category == 1) {
-        this.cafes.push(this.apiData[index])
+        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) =>{
+          //console.log(rateData.rates.sumuser)
+          var rating
+          if(rateData.rates.sumuser == 0){
+            rating = 0
+          }else{
+           rating = rateData.rates.sumrates/rateData.rates.sumuser
+          }
+          this.apiData[index].rate = rating
+          // console.log(this.apiData[index])
+          this.cafes.push(this.apiData[index])
+        })
+        
       }
       if (this.apiData[index].category == 2) {
-        this.rests.push(this.apiData[index])
+        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) =>{
+          //console.log(rateData.rates.sumuser)
+          var rating
+          if(rateData.rates.sumuser == 0){
+            rating = 0
+          }else{
+           rating = rateData.rates.sumrates/rateData.rates.sumuser
+          }
+          this.apiData[index].rate = rating
+          // console.log(this.apiData[index])
+          this.rests.push(this.apiData[index])
+        })
       }
       if (this.apiData[index].category == 3) {
-        this.shops.push(this.apiData[index])
+        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) =>{
+          //console.log(rateData.rates.sumuser)
+          var rating
+          if(rateData.rates.sumuser == 0){
+            rating = 0
+          }else{
+           rating = rateData.rates.sumrates/rateData.rates.sumuser
+          }
+          this.apiData[index].rate = rating
+          // console.log(this.apiData[index])
+          this.shops.push(this.apiData[index])
+        })
+        
       }
       if (this.apiData[index].category == 4) {
-        this.gyms.push(this.apiData[index])
+        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) =>{
+          //console.log(rateData.rates.sumuser)
+          var rating
+          if(rateData.rates.sumuser == 0){
+            rating = 0
+          }else{
+           rating = rateData.rates.sumrates/rateData.rates.sumuser
+          }
+          this.apiData[index].rate = rating
+          // console.log(this.apiData[index])
+          this.gyms.push(this.apiData[index])
+        })
       }
     }
     this.items = this.apiData;
@@ -123,7 +171,7 @@ export class HomePage {
     this.navCtrl.push(PostsListPage, { storeId: item._id, storeName: item.name })
   }
   addToFavorite(fav) {
-    this.apiServiceProvider.makeFavorite(fav._id, "5b1cf04f4b9d4e2f94178f88")
+    this.apiServiceProvider.makeFavorite(fav._id,this.user.id)
   }
 
   backToWelcome(){
@@ -135,5 +183,11 @@ export class HomePage {
       localStorage.clear();
       setTimeout(() => this.backToWelcome(), 1000);
  }
- 
+ onModelChange(rat,storeItem){
+  //  console.log(this.rate)
+   console.log(storeItem)
+  this.apiServiceProvider.addRate(storeItem._id,this.user.id,this.rate).subscribe((res)=>{
+    console.log(res)
+  })
+ }
 }

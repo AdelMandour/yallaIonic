@@ -28,6 +28,11 @@ export class ApiServiceProvider {
       // .do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json())
   }
+  getStoreData(storeID) {
+    return this.http.get(this.getApiUrl + "/getstoredata/" + storeID)
+      // .do((res: Response) => console.log(res.json()))
+      .map((res: Response) => res.json())
+  }
   getStore(storeID) {
     return this.http.get(this.getApiUrl + "/getstore/" + storeID)
       // .do((res: Response) => console.log(res.json()))
@@ -153,5 +158,23 @@ export class ApiServiceProvider {
       content:contentmsg
     })
     return this.http.post(this.getApiUrl + "/addfeedback", data, options).map(res => res.json())
+  }
+  addRate(storeID,userID,userRate){
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      });
+      let options = new RequestOptions({ headers: headers });
+    let data = JSON.stringify({
+      storeid:storeID,
+      userid:userID,
+      rate:userRate
+    })
+    return this.http.post(this.getApiUrl + "/addrate", data, options).map(res => res.json())
+  }
+  getRate(storeID){
+    return this.http.get(this.getApiUrl + "/getrate/" + storeID)
+      // .do((res: Response) => console.log(res.json()))
+      .map((res: Response) => res.json())
   }
 }

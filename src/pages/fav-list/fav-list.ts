@@ -22,13 +22,15 @@ export class FavListPage {
   searchActivated
   items
   name
+  user
   constructor(private storage: Storage,
     public navCtrl: NavController,
     public navParams: NavParams,
     private apiServiceProvider: ApiServiceProvider) {
-    storage.get("user").then((user) => {
-      if (user) {
-        this.name = user.username
+    storage.get("user").then((userdata) => {
+      if (userdata) {
+        this.name = userdata.username
+        this.user = userdata
         this.getFav()
         this.searchActivated = false
       } else {
@@ -42,14 +44,15 @@ export class FavListPage {
   }
   getFav() {
     this.favList = []
-    this.apiServiceProvider.getFavorites("5b1cf04f4b9d4e2f94178f88").subscribe((data) => {
+    this.apiServiceProvider.getFavorites(this.user.id).subscribe((data) => {
       this.favData = data.allfavorite;
       this.favData.forEach(element => {
         if(element['storeid']){
           // console.log(element)
-        this.apiServiceProvider.getStore(element['storeid']._id).subscribe((data) => {
-          // console.log(data)
-          if (data[1]) {
+        this.apiServiceProvider.getStoreData(element['storeid']._id).subscribe((data) => {
+          // console.log()
+          this.favList.push(data.stores[0])
+          /*if (data[1]) {
             data[1].store[0]._id = element['storeid']._id
             // console.log(data[1].store[0])
             this.favList.push(data[1].store[0])
@@ -57,7 +60,7 @@ export class FavListPage {
             data[0].store[0]._id = element['storeid']._id
             // console.log(data[0].store[0])
             this.favList.push(data[0].store[0])
-          }
+          }*/
         })
       }
       });

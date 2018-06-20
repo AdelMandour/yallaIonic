@@ -19,13 +19,17 @@ import { CommentPage } from '../comment/comment';
 export class PostViewPage {
   post
   store
-  userid
+  user
   likeFound = false
   commentView = false
   comments
   commentarr
   startindex = 0
-  endindex = 9
+  endindex = 5
+  showLoad = false
+  comment_msg
+  commentlength = 0
+  showback = false
   constructor(
     public alertCtrl: AlertController,
     public apiServiceProvider: ApiServiceProvider,
@@ -35,27 +39,30 @@ export class PostViewPage {
     this.post = navParams.get("post")
     this.store = navParams.get("store")
     storage.get("user").then((user) => {
-      this.userid = user.id
-      console.log("user "+this.userid)
+      this.user = user
+      // console.log("user "+this.userid)
       this.post.userslikes.forEach(element => {
-        if (element == this.userid) {
+        if (element == this.user.id) {
           this.likeFound = true
         }
       });
     })
-    console.log("post "+this.post._id)
-    console.log("store "+this.store._id)
+    // console.log("post "+this.post._id)
+    // console.log("store "+this.store._id)
+    this.comments = []
     apiServiceProvider.getComment(this.post._id).subscribe((commentdata) =>{
       if(commentdata.length > 5){
         this.commentarr = commentdata
-        this.comments = []
+        this.commentlength = this.commentarr.length
+        this.showLoad = true
         for (let index = 0; index < 5; index++) {
           this.comments.push(this.commentarr[index])          
         }
       }else{
         this.comments = commentdata
-      console.log("asda")
-      console.log(this.comments)
+        this.commentlength = this.comments.length
+      // console.log("asda")
+      // console.log(this.comments)
       }
     })
     //console.log(this.post)
@@ -68,15 +75,15 @@ export class PostViewPage {
   like() {
     //console.log(content_id)
     if (this.likeFound) {
-      this.apiServiceProvider.addLike(this.post._id, 0, this.userid).subscribe((data) => {
+      this.apiServiceProvider.addLike(this.post._id, 0, this.user.id).subscribe((data) => {
         this.post.like = this.post.like - 1
-        this.post.userslikes.splice(this.post.userslikes.indexOf(this.userid), 1)
+        this.post.userslikes.splice(this.post.userslikes.indexOf(this.user.id), 1)
         this.likeFound = false
       })
     } else {
-      this.apiServiceProvider.addLike(this.post._id, 1, this.userid).subscribe((data) => {
+      this.apiServiceProvider.addLike(this.post._id, 1, this.user.id).subscribe((data) => {
         this.post.like = this.post.like + 1
-        this.post.userslikes.push(this.userid)
+        this.post.userslikes.push(this.user.id)
         this.likeFound = true
       })
     }
@@ -84,5 +91,63 @@ export class PostViewPage {
   comment(){
     this.commentView = true
   }
-
+  loadmore(){
+    this.showback = true
+    this.startindex = this.endindex
+    this.endindex = this.endindex + 5
+    if(this.startindex <= this.commentarr.length){
+      if(this.endindex <= this.commentarr.length){
+        // console.log(this.commentarr)
+        this.comments = []
+        for (let index = this.startindex; index < this.endindex; index++) {
+          this.comments.push(this.commentarr[index]);
+          // console.log(this.comments)
+        }
+      }else{
+        // console.log(this.commentarr[this.startindex])
+        this.comments = []
+        for (let index = this.startindex; index < this.commentarr.length; index++) {
+          this.comments.push(this.commentarr[index]);
+          // console.log(this.comments)
+        }
+      }
+    }
+  }
+  addcomment(){
+    this.apiServiceProvider.addComment(this.store._id,this.user.id,this.post._id,this.comment_msg).subscribe((data) =>{
+      this.comments.push({
+        content:this.comment_msg,
+        userid:{
+          img:this.user.img,
+          username:this.user.username
+        }
+      })
+      this.comment_msg = ""
+      this.commentlength = this.commentlength + 1
+    })
+  }
+  loadback(){
+    this.startindex = this.startindex - 5
+    this.endindex = this.endindex - 5
+    if(this.startindex >= 0){
+      if(this.startindex == 0){
+        this.showback = false
+      }
+      if(this.endindex >= 5){
+        // console.log(this.co
+        this.comments = []
+        for (let index = this.startindex; index < this.endindex; index++) {
+          this.comments.push(this.commentarr[index]);
+          // console.log(this.comments)
+        }
+      }else{
+        // console.log(this.commentarr[this.startindex])
+        this.comments = []
+        for (let index = this.startindex; index < this.commentarr.length; index++) {
+          this.comments.push(this.commentarr[index]);
+          // console.log(this.comments)
+        }
+      }
+    }
+  }
 }
