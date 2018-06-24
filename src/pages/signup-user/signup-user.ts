@@ -13,6 +13,7 @@ import { ListPage } from '../list/list';
 export class SignupUserPage {
 
   responseData: any;
+  gender
   userData =
     {
       "username": "",
@@ -31,7 +32,11 @@ export class SignupUserPage {
       "email": "",
       "username": "",
       "img": "",
-      "imgcover": ""
+      "imgcover": "",
+      "firstname": "",
+      "lastname": "",
+      "phone": "",
+      "address":""
     }
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -50,22 +55,32 @@ export class SignupUserPage {
       // console.log(resp.coords.longitude)
       this.userData.lat = "" + resp.coords.latitude
       this.userData.long = "" + resp.coords.longitude
-      this.userData.img = "94135.jpg"
-      this.userData.imgcover = "94135.jpg"
+      if(this.gender == "f"){
+        this.userData.img = "jane-wamoi.png"
+        this.userData.imgcover = "logo.png"
+      }else{
+        this.userData.img = "BB-avatar.png"
+        this.userData.imgcover = "logo.png"
+      }
       this.apiServiceProvider.signup(this.userData).subscribe(resp => {
-         //console.log(resp)
+         console.log(resp)
          if(resp['user']){
           this.userStorage.id = resp.user['_id']
         this.userStorage.email = resp.user['email']
         this.userStorage.username = resp.user['username']
         this.userStorage.img = resp.user['img']
         this.userStorage.imgcover = resp.user['imgcover']
+        this.userStorage.phone = resp.user['phone']
+        this.userStorage.firstname = resp.user['firstname']
+        this.userStorage.lastname = resp.user['lastname']
+        this.userStorage.address = resp.user['address']
         //  console.log(this.userStorage)
         //  console.log(resp.token)  
         this.storage.set('user', this.userStorage)
         this.storage.set('token', resp.token)
         this.navCtrl.setRoot(ListPage)
          }else{
+           console.log(resp)
           let alert = this.alertCtrl.create({
                 title: 'Error',
                 subTitle: resp[0].err,
@@ -89,6 +104,7 @@ export class SignupUserPage {
     //Login page link
     this.navCtrl.push(SigninUserPage);
   }
+  
 
 
 }

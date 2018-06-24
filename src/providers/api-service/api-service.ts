@@ -52,7 +52,7 @@ export class ApiServiceProvider {
       this.http.post(this.getApiUrl + "/makefavour", data, options)
         .toPromise()
         .then((response) => {
-          // console.log('API Response : ', response.json());
+        //  console.log('API Response : ', response.json());
           resolve(response.json());
         })
         .catch((error) => {
@@ -176,5 +176,8 @@ export class ApiServiceProvider {
     return this.http.get(this.getApiUrl + "/getrate/" + storeID)
       // .do((res: Response) => console.log(res.json()))
       .map((res: Response) => res.json())
+  }
+  editUser(id,data){
+    return this.http.put(this.userUrl+"/edit/"+id,data).map(Res=>Res.json())
   }
 }

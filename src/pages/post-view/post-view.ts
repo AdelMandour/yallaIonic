@@ -23,13 +23,14 @@ export class PostViewPage {
   likeFound = false
   commentView = false
   comments
-  commentarr
+  commentarr = []
   startindex = 0
   endindex = 5
   showLoad = false
   comment_msg
   commentlength = 0
   showback = false
+  showMoreCancle = false
   constructor(
     public alertCtrl: AlertController,
     public apiServiceProvider: ApiServiceProvider,
@@ -42,7 +43,7 @@ export class PostViewPage {
       this.user = user
       // console.log("user "+this.userid)
       this.post.userslikes.forEach(element => {
-        if (element == this.user.id) {
+        if (element == this.user._id) {
           this.likeFound = true
         }
       });
@@ -75,15 +76,15 @@ export class PostViewPage {
   like() {
     //console.log(content_id)
     if (this.likeFound) {
-      this.apiServiceProvider.addLike(this.post._id, 0, this.user.id).subscribe((data) => {
+      this.apiServiceProvider.addLike(this.post._id, 0, this.user._id).subscribe((data) => {
         this.post.like = this.post.like - 1
-        this.post.userslikes.splice(this.post.userslikes.indexOf(this.user.id), 1)
+        this.post.userslikes.splice(this.post.userslikes.indexOf(this.user._id), 1)
         this.likeFound = false
       })
     } else {
-      this.apiServiceProvider.addLike(this.post._id, 1, this.user.id).subscribe((data) => {
+      this.apiServiceProvider.addLike(this.post._id, 1, this.user._id).subscribe((data) => {
         this.post.like = this.post.like + 1
-        this.post.userslikes.push(this.user.id)
+        this.post.userslikes.push(this.user._id)
         this.likeFound = true
       })
     }
@@ -106,6 +107,7 @@ export class PostViewPage {
       }else{
         // console.log(this.commentarr[this.startindex])
         this.comments = []
+        this.showMoreCancle = true
         for (let index = this.startindex; index < this.commentarr.length; index++) {
           this.comments.push(this.commentarr[index]);
           // console.log(this.comments)
@@ -114,7 +116,14 @@ export class PostViewPage {
     }
   }
   addcomment(){
-    this.apiServiceProvider.addComment(this.store._id,this.user.id,this.post._id,this.comment_msg).subscribe((data) =>{
+    this.apiServiceProvider.addComment(this.store._id,this.user._id,this.post._id,this.comment_msg).subscribe((data) =>{
+      this.commentarr.push({
+        content:this.comment_msg,
+        userid:{
+          img:this.user.img,
+          username:this.user.username
+        }
+      })
       this.comments.push({
         content:this.comment_msg,
         userid:{
@@ -127,6 +136,7 @@ export class PostViewPage {
     })
   }
   loadback(){
+    this.showMoreCancle = false
     this.startindex = this.startindex - 5
     this.endindex = this.endindex - 5
     if(this.startindex >= 0){

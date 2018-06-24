@@ -22,10 +22,10 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyHeaderPage } from '../components/myheader/myheader';
 import { ProfilePage } from '../pages/profile/profile';
 import { PostViewPage } from '../pages/post-view/post-view';
-import { CommentPage } from '../pages/comment/comment';
 // Import ionic2-rating module
 import { Ionic2RatingModule } from 'ionic2-rating';
-import { ImagePage } from '../pages/image/image';
+import { Toast } from '@ionic-native/toast';
+import { EditPage } from '../pages/edit/edit';
 @NgModule({
   declarations: [
     MyApp,
@@ -39,8 +39,7 @@ import { ImagePage } from '../pages/image/image';
     FavListPage,
     ProfilePage,
     PostViewPage,
-    CommentPage,
-    ImagePage
+    EditPage
   ],
   imports: [
     BrowserModule,
@@ -71,8 +70,7 @@ import { ImagePage } from '../pages/image/image';
     MyHeaderPage,
     ProfilePage,
     PostViewPage,
-    CommentPage,
-    ImagePage
+    EditPage
   ],
   providers: [
     StatusBar,
@@ -80,7 +78,8 @@ import { ImagePage } from '../pages/image/image';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiServiceProvider,
     Geolocation,
-    MyHeaderPage
+    MyHeaderPage,
+    Toast
   ]
 })
 export class AppModule {}

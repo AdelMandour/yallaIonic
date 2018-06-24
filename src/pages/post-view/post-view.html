@@ -63,10 +63,10 @@
         </ion-item>
       </ion-card-content>
       <button item-end ion-button icon-end clear small (click)="loadback()" *ngIf="showLoad == true && showback == true" >
-          <div>show back</div>
+          <div>Previous</div>
       </button>
-      <button item-end ion-button icon-end clear small (click)="loadmore()" *ngIf="showLoad == true" >
-          <div>show more</div>
+      <button item-end ion-button icon-end clear small (click)="loadmore()" *ngIf="showLoad == true && showMoreCancle == false" >
+          <div>Next</div>
       </button>
       <ion-textarea placeholder="enter your comment" [(ngModel)]="comment_msg"></ion-textarea>
       <button item-end ion-button icon-end clear small (click)="addcomment()" >

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { ApiServiceProvider } from '../../providers/api-service/api-service';
 import { Storage } from '@ionic/storage';
 import { AlertController } from 'ionic-angular';
 import { SigninUserPage } from '../signin-user/signin-user';
 import { PostsListPage } from '../posts-list/posts-list';
-
+import { ToastController } from 'ionic-angular';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -22,15 +22,18 @@ export class HomePage {
   apiData;
   //dataList = [];
   dataList;
-  userDetails : any;
+  userDetails: any;
   responseData: any;
   app;
   name
-  userPostData = {"user_id":"","token":""};
+  userPostData = { "user_id": "", "token": "" };
   rate
   user
-  constructor(private storage: Storage,
-    public navCtrl: NavController, 
+  constructor(
+    private platform: Platform,
+    private toastCtrl: ToastController,
+    private storage: Storage,
+    public navCtrl: NavController,
     private apiServiceProvider: ApiServiceProvider,
     public alertCtrl: AlertController) {
     storage.get("user").then((userdata) => {
@@ -43,13 +46,13 @@ export class HomePage {
         navCtrl.setRoot(SigninUserPage)
       }
     })
-    
 
-   /* const data = JSON.parse(localStorage.getItem('userData'));
-    this.userDetails = data.userData;
-  
-    this.userPostData.user_id = this.userDetails.user_id;
-    this.userPostData.token = this.userDetails.token;*/
+
+    /* const data = JSON.parse(localStorage.getItem('userData'));
+     this.userDetails = data.userData;
+   
+     this.userPostData.user_id = this.userDetails.user_id;
+     this.userPostData.token = this.userDetails.token;*/
   }//End Constructor
 
   //start prompt
@@ -61,7 +64,7 @@ export class HomePage {
           text: 'Sign In User',
           handler: data => {
             this.navCtrl.push(SigninUserPage);
-           // console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         }//,
         // {
@@ -78,11 +81,12 @@ export class HomePage {
   //end prompt
   getPosts() {
     this.apiServiceProvider.getData().subscribe((data) => {
-      this.apiData = data.stores;
-      this.initializeItems();
+      //console.log(data)
+      this.apiData = data;
+     this.initializeItems();
     });
   }
-    initializeItems() {
+  initializeItems() {
     this.items = []
     this.gyms = []
     this.rests = []
@@ -90,28 +94,28 @@ export class HomePage {
     this.shops = []
     for (let index = 0; index < this.apiData.length; index++) {
       if (this.apiData[index].category == 1) {
-        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) =>{
+        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) => {
           //console.log(rateData.rates.sumuser)
           var rating
-          if(rateData.rates.sumuser == 0){
+          if (rateData.rates.sumuser == 0) {
             rating = 0
-          }else{
-           rating = rateData.rates.sumrates/rateData.rates.sumuser
+          } else {
+            rating = rateData.rates.sumrates / rateData.rates.sumuser
           }
           this.apiData[index].rate = rating
           // console.log(this.apiData[index])
           this.cafes.push(this.apiData[index])
         })
-        
+
       }
       if (this.apiData[index].category == 2) {
-        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) =>{
+        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) => {
           //console.log(rateData.rates.sumuser)
           var rating
-          if(rateData.rates.sumuser == 0){
+          if (rateData.rates.sumuser == 0) {
             rating = 0
-          }else{
-           rating = rateData.rates.sumrates/rateData.rates.sumuser
+          } else {
+            rating = rateData.rates.sumrates / rateData.rates.sumuser
           }
           this.apiData[index].rate = rating
           // console.log(this.apiData[index])
@@ -119,28 +123,28 @@ export class HomePage {
         })
       }
       if (this.apiData[index].category == 3) {
-        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) =>{
+        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) => {
           //console.log(rateData.rates.sumuser)
           var rating
-          if(rateData.rates.sumuser == 0){
+          if (rateData.rates.sumuser == 0) {
             rating = 0
-          }else{
-           rating = rateData.rates.sumrates/rateData.rates.sumuser
+          } else {
+            rating = rateData.rates.sumrates / rateData.rates.sumuser
           }
           this.apiData[index].rate = rating
           // console.log(this.apiData[index])
           this.shops.push(this.apiData[index])
         })
-        
+
       }
       if (this.apiData[index].category == 4) {
-        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) =>{
+        this.apiServiceProvider.getRate(this.apiData[index]._id).subscribe((rateData) => {
           //console.log(rateData.rates.sumuser)
           var rating
-          if(rateData.rates.sumuser == 0){
+          if (rateData.rates.sumuser == 0) {
             rating = 0
-          }else{
-           rating = rateData.rates.sumrates/rateData.rates.sumuser
+          } else {
+            rating = rateData.rates.sumrates / rateData.rates.sumuser
           }
           this.apiData[index].rate = rating
           // console.log(this.apiData[index])
@@ -167,27 +171,72 @@ export class HomePage {
     }
   }
   itemSelected(item) {
-   // console.log(item)
+    // console.log(item)
     this.navCtrl.push(PostsListPage, { storeId: item._id, storeName: item.name })
   }
   addToFavorite(fav) {
-    this.apiServiceProvider.makeFavorite(fav._id,this.user.id)
+    var found = false
+    //console.log("favfun")
+    this.storage.get(this.user._id + "fav").then((value) => {
+      if (value) {
+        this.apiServiceProvider.getFavorites(this.user._id).subscribe((data) => {
+          //console.log("data")
+          data.allfavorite.forEach(element => {
+            if (element.storeid._id == fav._id) {
+              found = true
+              //    console.log(found)
+              this.showToast("Already in Favorite")
+            }
+          });
+          if (!found) {
+            //console.log("not found")
+            this.apiServiceProvider.makeFavorite(fav._id, this.user.id).then((res) => {
+              this.showToast("Added To Favorite")
+            });
+          }
+        })
+      } else {
+        this.apiServiceProvider.makeFavorite(fav._id, this.user._id).then((res) => {
+          this.storage.set(this.user.id + "fav", true)
+          this.showToast("Added To Favorite")
+        })
+
+      }
+    })
+
+
+    // this.apiServiceProvider.makeFavorite(fav._id,this.user.id)    
+    // 
   }
 
-  backToWelcome(){
+  backToWelcome() {
     const root = this.app.getRootNav();
     root.popToRoot();
- }
- 
- logout(){
-      localStorage.clear();
-      setTimeout(() => this.backToWelcome(), 1000);
- }
- onModelChange(rat,storeItem){
-  //  console.log(this.rate)
-   console.log(storeItem)
-  this.apiServiceProvider.addRate(storeItem._id,this.user.id,this.rate).subscribe((res)=>{
-    console.log(res)
-  })
- }
+  }
+
+  logout() {
+    localStorage.clear();
+    setTimeout(() => this.backToWelcome(), 1000);
+  }
+  onModelChange(rat, storeItem) {
+    //  console.log(this.rate)
+   // console.log(storeItem)
+    this.apiServiceProvider.addRate(storeItem._id, this.user._id, this.rate).subscribe((res) => {
+     // console.log(res)
+     this.showToast("Rate Added")
+    })
+  }
+  showToast(msg){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      position: 'middle'
+    });
+
+    toast.onDidDismiss(() => {
+      
+    });
+
+    toast.present();
+  }
 }

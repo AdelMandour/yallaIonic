@@ -44,7 +44,7 @@ export class FavListPage {
   }
   getFav() {
     this.favList = []
-    this.apiServiceProvider.getFavorites(this.user.id).subscribe((data) => {
+    this.apiServiceProvider.getFavorites(this.user._id).subscribe((data) => {
       this.favData = data.allfavorite;
       this.favData.forEach(element => {
         if(element['storeid']){
@@ -67,7 +67,7 @@ export class FavListPage {
     });
   }
   itemSelected(item) {
-    // console.log(item)
+    //console.log(item)
     this.navCtrl.push(PostsListPage, { storeId: item._id, storeName: item.name })
   }
   initializeItems() {

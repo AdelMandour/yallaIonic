@@ -8,6 +8,13 @@
       <ion-input type="text" [(ngModel)]="userData.username" placeholder="Write Your Username"></ion-input>
     </ion-item>
     <ion-item>
+        <ion-label>Gender</ion-label>
+        <ion-select [(ngModel)]="gender">
+          <ion-option value="f">Female</ion-option>
+          <ion-option value="m">Male</ion-option>
+        </ion-select>
+      </ion-item>
+    <ion-item>
       <ion-input type="email" [(ngModel)]="userData.email" placeholder="Write Your Email"></ion-input>
     </ion-item>
 
@@ -26,12 +33,8 @@
     <ion-item>
       <ion-input type="text" [(ngModel)]="userData.phone" placeholder="Phone"></ion-input>
     </ion-item>
-    <!-- <ion-item>
-        <button ion-button >
-          <div>Image</div>
-        </button>
-      </ion-item> -->
   </ion-list>
+
   <div padding>
     <button ion-button color="primary" block (click)="signup()">Sign Up</button>
     <a href="#" (click)="login()">Sign In Page</a>
